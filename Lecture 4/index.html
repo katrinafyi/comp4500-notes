@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    
+    <title>Lecture 4</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+    <!--<link rel="stylesheet" href="https://unpkg.com/mvp.css">-->
+    <!--<link rel="stylesheet" href="https://latex.now.sh/style.css">-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+    <style>
+      .katex { font-size: 1.1em; }
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          color: #aaaaaa;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+      div.sourceCode {   }
+      @media screen {
+        pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+      code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+      code span.at { color: #7d9029; } /* Attribute */
+      code span.bn { color: #40a070; } /* BaseN */
+      code span.bu { } /* BuiltIn */
+      code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #4070a0; } /* Char */
+      code span.cn { color: #880000; } /* Constant */
+      code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+      code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+      code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+      code span.dt { color: #902000; } /* DataType */
+      code span.dv { color: #40a070; } /* DecVal */
+      code span.er { color: #ff0000; font-weight: bold; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #40a070; } /* Float */
+      code span.fu { color: #06287e; } /* Function */
+      code span.im { } /* Import */
+      code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+      code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+      code span.op { color: #666666; } /* Operator */
+      code span.ot { color: #007020; } /* Other */
+      code span.pp { color: #bc7a00; } /* Preprocessor */
+      code span.sc { color: #4070a0; } /* SpecialChar */
+      code span.ss { color: #bb6688; } /* SpecialString */
+      code span.st { color: #4070a0; } /* String */
+      code span.va { color: #19177c; } /* Variable */
+      code span.vs { color: #4070a0; } /* VerbatimString */
+      code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    </style>
+    <!--<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>-->
+    <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    var macros = [];
+    /*
+    const BATCH_SIZE = 100;
+    var i = 0;
+    while (i < mathElements.length) {
+      const start = i;
+      setTimeout(() => {
+        for (var j = 0; j < BATCH_SIZE; j++) {
+          const i = start + j;
+          if (i >= mathElements.length) break;
+
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }, 0);
+      i += BATCH_SIZE;
+    }
+    */
+    
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+      katex.render(texText.data, mathElements[i], {
+        displayMode: mathElements[i].classList.contains('display'),
+        throwOnError: false,
+        macros: macros,
+        fleqn: false
+      });
+    }}
+    
+    });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <h1>Lecture 4</h1>
+
+    <!--
+<header id="title-block-header">
+<h1 class="title">Lecture 4 — Graphs 2</h1>
+<p class="author">Kenton Lam</p>
+<p class="date">2002-08-25</p>
+</header>
+-->
+
+
+<h1 id="lecture-4-graphs-2">Lecture 4 — Graphs 2</h1>
+<blockquote>
+<p>The midsemester exam will be on 15th September.</p>
+</blockquote>
+<p>Recall graphs are used to represent a great many problems. They may be directed/undirected and weighted/unweighted.</p>
+<p>They can be represented (most commonly) by an adjacency list or an adjacency matrix.</p>
+<p>Two search methods are BFS and DFS. BFS is able to find shortest distances from a graph. DFS can be used as a subroutine.</p>
+<h2 id="minimum-spanning-tree">Minimum Spanning Tree</h2>
+<p>Suppose you are laying cable and want to connect some houses using the least amount of cable possible. This is exactly a minimum spanning tree problem.</p>
+<p>Suppose we have a connected, undirected, weighted graph <span class="math inline">G=(V, E)</span> and weights <span class="math inline">w(u, v)</span> denoting the weight between <span class="math inline">u</span> and <span class="math inline">v</span>. We want to find an acyclic subset <span class="math inline">T \subseteq E</span> such that</p>
+<ul>
+<li>all vertices in <span class="math inline">G</span> are connected, and</li>
+<li>the total weight of <span class="math inline">T</span>, <span class="math inline">\sum w(u, v)</span> is minimised.</li>
+</ul>
+<p>Specifically, <span class="math inline">T</span> is a <strong>tree</strong> (a connected acyclic subgraph of <span class="math inline">G</span>) that <strong>spans</strong> (contains all vertices in <span class="math inline">G</span>) and <strong>minimises</strong> the sum of edge weights.</p>
+<h2 id="generic-constructive-algorithm">Generic Constructive Algorithm</h2>
+<p>Start with an empty set for <span class="math inline">T</span> and while <span class="math inline">T</span> is not a spanning tree, find an edge which can be added to <span class="math inline">T</span> (i.e. does not create any cycles) and add it.</p>
+<h2 id="prims-algorithm">Prim’s Algorithm</h2>
+<p>Here, <span class="math inline">T</span> is always a tree. Start at any vertex (this will be our initial <span class="math inline">T</span>). Repeatedly add the least-weight edge leaving the constructed tree <span class="math inline">T</span>. For each edge leaving the adjacent vertex, we update that in a priority queue. The algorithm stops when <span class="math inline">T</span> is a spanning tree, i.e. contains every vertex from <span class="math inline">G</span>.</p>
+<p>How can we find the least-weight edge leaving <span class="math inline">T</span>?</p>
+<ul>
+<li>Maintain a priority queue <span class="math inline">Q</span> containing vertices <span class="math inline">V-T</span>. For each vertex in this queue, its key is the minimum edge weight connecting it to <span class="math inline">T</span>. Additionally, its parent is the vertex adjacent along this least-weight edge.</li>
+<li>Recall that a priority queue’s operations are insert, extractMin, and decreaseKey.</li>
+</ul>
+<h2 id="kruskals-algorithm">Kruskal’s Algorithm</h2>
+<p>Also used to find a minimum spanning tree. Here, <span class="math inline">T</span> is always a spanning acyclic subgraph, a <em>forest</em> of trees. Initially, <span class="math inline">T</span> is all vertices but no edges.</p>
+<p>At each step, the least-weight edge connecting two trees in <span class="math inline">T</span> is added to the forest. We repeat this process until <span class="math inline">T</span> is connected.</p>
+<p>The trees in <span class="math inline">T</span> are represented using a disjoint set data structure. Each set has a representative element from that set. Its operations are makeSet, findSet, and union. These disjoint sets are represented by rooted trees, and the representative element is the root of the tree. Each element in these trees stores a pointer to its parent (or itself if it is the root) and a rank (an upper bound on the node’s height in the tree).</p>
+<ul>
+<li><p>makeSet just creates a new single-node tree. Its parent will be the node itself and its rank is zero.</p></li>
+<li><p>findSet returns the root of the tree. To make this fast, it collapses the path from (grand)children to point directly to the root.</p>
+<figure>
+<img src="/assets/image-20200825092403249.png" alt="" /><figcaption>image-20200825092403249</figcaption>
+</figure></li>
+<li><p>union works by linking the representative elements of its arguments. The subtree with greater rank is used as the combined representative element. If they have the same rank, choose arbitrarily but increment the final rank.</p>
+<figure>
+<img src="/assets/image-20200825092746558.png" alt="" /><figcaption>image-20200825092746558</figcaption>
+</figure>
+<figure>
+<img src="/assets/image-20200825092759020.png" alt="" /><figcaption>image-20200825092759020</figcaption>
+</figure></li>
+</ul>
+<h3 id="pseudocode">Pseudocode</h3>
+<ul>
+<li>Start by making disjoint sets for each vertex.</li>
+<li>Order all edges ascending by weight.</li>
+<li>For each edge <span class="math inline">(u, v)</span> in this sorted list:
+<ul>
+<li>If the set of <span class="math inline">u</span> is not the set of <span class="math inline">v</span>, add <span class="math inline">(u, v)</span> to <span class="math inline">T</span> and union the sets.</li>
+</ul></li>
+<li>After iterating through all edges, <span class="math inline">T</span> is our minimum spanning tree.</li>
+</ul>
+    <p><small>Generated at 9/13/2020, 1:19:15 AM.</small></p>
+  </body>
+</html>

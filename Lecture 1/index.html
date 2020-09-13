@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    
+    <title>Lecture 1</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+    <!--<link rel="stylesheet" href="https://unpkg.com/mvp.css">-->
+    <!--<link rel="stylesheet" href="https://latex.now.sh/style.css">-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+    <style>
+      .katex { font-size: 1.1em; }
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          color: #aaaaaa;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+      div.sourceCode {   }
+      @media screen {
+        pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+      code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+      code span.at { color: #7d9029; } /* Attribute */
+      code span.bn { color: #40a070; } /* BaseN */
+      code span.bu { } /* BuiltIn */
+      code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #4070a0; } /* Char */
+      code span.cn { color: #880000; } /* Constant */
+      code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+      code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+      code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+      code span.dt { color: #902000; } /* DataType */
+      code span.dv { color: #40a070; } /* DecVal */
+      code span.er { color: #ff0000; font-weight: bold; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #40a070; } /* Float */
+      code span.fu { color: #06287e; } /* Function */
+      code span.im { } /* Import */
+      code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+      code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+      code span.op { color: #666666; } /* Operator */
+      code span.ot { color: #007020; } /* Other */
+      code span.pp { color: #bc7a00; } /* Preprocessor */
+      code span.sc { color: #4070a0; } /* SpecialChar */
+      code span.ss { color: #bb6688; } /* SpecialString */
+      code span.st { color: #4070a0; } /* String */
+      code span.va { color: #19177c; } /* Variable */
+      code span.vs { color: #4070a0; } /* VerbatimString */
+      code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    </style>
+    <!--<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>-->
+    <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    var macros = [];
+    /*
+    const BATCH_SIZE = 100;
+    var i = 0;
+    while (i < mathElements.length) {
+      const start = i;
+      setTimeout(() => {
+        for (var j = 0; j < BATCH_SIZE; j++) {
+          const i = start + j;
+          if (i >= mathElements.length) break;
+
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }, 0);
+      i += BATCH_SIZE;
+    }
+    */
+    
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+      katex.render(texText.data, mathElements[i], {
+        displayMode: mathElements[i].classList.contains('display'),
+        throwOnError: false,
+        macros: macros,
+        fleqn: false
+      });
+    }}
+    
+    });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <h1>Lecture 1</h1>
+
+    <!--
+<header id="title-block-header">
+<h1 class="title">Lecture 1 — Introduction</h1>
+<p class="author">Kenton Lam</p>
+</header>
+-->
+
+
+<h1 id="comp4500-advanced-algorithms-data-structures">COMP4500 — Advanced Algorithms &amp; Data Structures</h1>
+<p>Lectured by Ahmad Abdel-Hafez. Currently works full-time as a data scientist. First time teaching at UQ. Not a mathematician.</p>
+<h1 id="introduction-and-background">Introduction and Background</h1>
+<h2 id="motivation">Motivation</h2>
+<ul>
+<li><em>Creating</em> more efficient algorithms.</li>
+<li><em>Justifying</em> choice of algorithms using theory.</li>
+<li><em>Improving</em> problem solving skills.</li>
+<li>This is a prerequisite for a job at Google, Amazon, Oracle, etc.</li>
+</ul>
+<h3 id="research-areas">Research Areas</h3>
+<p>These areas are currently being researched and developed:</p>
+<ul>
+<li>distributed/parallel algorithms,</li>
+<li>neural networks/pattern recognition,</li>
+<li>bioinformatics, and</li>
+<li>quantum computing.</li>
+</ul>
+<h3 id="outline">Outline</h3>
+<ul>
+<li>Background and asymptotic notation.</li>
+<li>Recurrences, divide and conquer.</li>
+<li>Graph algorithms (3 weeks).</li>
+<li>Dynamic programming (2 weeks). <strong>Assignment 1 published.</strong></li>
+<li><strong>Midsemester exam.</strong></li>
+<li><strong>Assignment 2 published.</strong></li>
+<li>Greedy algorithms.</li>
+<li>Amortised analysis.</li>
+<li>Complexity classes.</li>
+<li>Randomised algorithms.</li>
+</ul>
+<h3 id="other">Other</h3>
+<ul>
+<li>Textbook is Cormen at al. (CLRS).</li>
+<li>Tutorials start in Week 2.</li>
+<li>Piazza will be used.</li>
+<li>Consultation with lecturer can be organised by email.</li>
+</ul>
+<h1 id="running-time-analysis-and-asymptotic-notation">Running Time Analysis and Asymptotic Notation</h1>
+<ul>
+<li><p>An <strong>algorithm</strong> is a well-defined computation procedure which takes some values as <em>input</em> and produces some value as <em>output</em>.</p></li>
+<li><p>As an example, <em>insertion sort</em> is an algorithm taking an array as input and returning a sorted array. It works by building the sorted array from left to right by inserting the next value in its sorted position.</p></li>
+<li><p><em>Loop invariants</em> can be used to prove an algorithm is correct.</p></li>
+<li><p><strong>Execution time</strong> depends on input size and the input itself. Generally, we want an upper bound on the execution time.</p>
+<ul>
+<li>There are <em>worst</em>, <em>average</em>, and <em>best</em> case execution times. Average case is the average over all inputs, weighted by the probability of that input.</li>
+</ul></li>
+<li><p>For example, insertion sort requires <span class="math inline">n(n-1)/2</span> comparisons in the worst case and <span class="math inline">n-1</span> in the best case.</p></li>
+</ul>
+<h2 id="asymptotic-notation">Asymptotic Notation</h2>
+<ul>
+<li><p>For sufficiently large <span class="math inline">n</span>, the constants are negligible.</p></li>
+<li><p>Example: <span class="math inline">2n^2 \in O(n^3 - n^2)</span>.</p></li>
+<li><p>Theorems:</p>
+<ul>
+<li>If <span class="math inline">f \in O(g)</span>, then <span class="math inline">g + f \in \Theta(g)</span>. If <span class="math inline">f</span> grows no larger than <span class="math inline">g</span>, it doesn’t affect the big-<span class="math inline">\Theta</span> bound of <span class="math inline">g</span>.</li>
+<li>If <span class="math inline">k &gt; 0</span>, then <span class="math inline">k n^a \in \Theta(n^a)</span>.</li>
+<li>If <span class="math inline">k &gt; 0</span> and <span class="math inline">0 \le a \le b</span>, then <span class="math inline">k n^a \in O(n^b)</span>.</li>
+</ul></li>
+<li><p><span class="math inline">f</span> is asymptotically non-negative if <span class="math inline">f(n) \ge 0</span> for <span class="math inline">n \ge n_0</span>.</p></li>
+<li><p>Theorem: If <span class="math inline">f, g</span> are asymptotically non-negative and <span class="math inline">\lim_{n \to \infty} f(n)/g(n) = c</span>, then:</p>
+<ul>
+<li><span class="math inline">f(n) \in O(g(n))</span> if <span class="math inline">c &lt; \infty</span>,</li>
+<li><span class="math inline">f(n) \in \Theta(g(n))</span> if <span class="math inline">0 &lt; c &lt; \infty</span>, and</li>
+<li>$f(n) (g(n)) $ if <span class="math inline">c &gt; 0</span>.</li>
+</ul></li>
+</ul>
+    <p><small>Generated at 9/13/2020, 1:19:14 AM.</small></p>
+  </body>
+</html>
