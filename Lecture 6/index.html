@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    
+    <title>Lecture 6</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+    <!--<link rel="stylesheet" href="https://unpkg.com/mvp.css">-->
+    <!--<link rel="stylesheet" href="https://latex.now.sh/style.css">-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+    <style>
+      .katex { font-size: 1.1em; }
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          color: #aaaaaa;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+      div.sourceCode {   }
+      @media screen {
+        pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+      code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+      code span.at { color: #7d9029; } /* Attribute */
+      code span.bn { color: #40a070; } /* BaseN */
+      code span.bu { } /* BuiltIn */
+      code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #4070a0; } /* Char */
+      code span.cn { color: #880000; } /* Constant */
+      code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+      code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+      code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+      code span.dt { color: #902000; } /* DataType */
+      code span.dv { color: #40a070; } /* DecVal */
+      code span.er { color: #ff0000; font-weight: bold; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #40a070; } /* Float */
+      code span.fu { color: #06287e; } /* Function */
+      code span.im { } /* Import */
+      code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+      code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+      code span.op { color: #666666; } /* Operator */
+      code span.ot { color: #007020; } /* Other */
+      code span.pp { color: #bc7a00; } /* Preprocessor */
+      code span.sc { color: #4070a0; } /* SpecialChar */
+      code span.ss { color: #bb6688; } /* SpecialString */
+      code span.st { color: #4070a0; } /* String */
+      code span.va { color: #19177c; } /* Variable */
+      code span.vs { color: #4070a0; } /* VerbatimString */
+      code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    </style>
+    <!--<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>-->
+    <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    var macros = [];
+    /*
+    const BATCH_SIZE = 100;
+    var i = 0;
+    while (i < mathElements.length) {
+      const start = i;
+      setTimeout(() => {
+        for (var j = 0; j < BATCH_SIZE; j++) {
+          const i = start + j;
+          if (i >= mathElements.length) break;
+
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }, 0);
+      i += BATCH_SIZE;
+    }
+    */
+    
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+      katex.render(texText.data, mathElements[i], {
+        displayMode: mathElements[i].classList.contains('display'),
+        throwOnError: false,
+        macros: macros,
+        fleqn: false
+      });
+    }}
+    
+    });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <h1>Lecture 6</h1>
+
+    <!--
+<header id="title-block-header">
+<h1 class="title">Lecture 6 — Dynamic Programming</h1>
+<p class="author">Kenton Lam</p>
+<p class="date">2020-11-07</p>
+</header>
+-->
+
+
+<h1 id="lecture-6-dynamic-programming">Lecture 6 — Dynamic Programming</h1>
+<p>Dynamic programming is a method for efficiently solving problems with a certain structure.</p>
+<ul>
+<li>Problems have <strong>optimal substructure property</strong> where an optimal solution can be expressed in terms of optimal solutions to subproblems.</li>
+<li>A naive recursive solution may be inefficient (exponential) due to repeated computation of subproblems.</li>
+<li>Dynamic programming avoids recomputation of subproblems by storing them.</li>
+</ul>
+<p>Generally, this requires a deep understanding of the problem.</p>
+<p>It can be constructed “<strong>bottom-up</strong>” which computes solutions to base-case subproblems first, then calculates larger subproblems until the goal can be computed. Massive speed improvements are possible, from exponential to polynomial time.</p>
+<p>Another strategy is <strong>memoisation</strong> which is a top-down approach. It follows the same call stack as recursion and is often more ‘elegant’, but with worse constant factors than bottom-up.</p>
+<h2 id="fibonacci-numbers">Fibonacci numbers</h2>
+<p>The most basic dynamic programming is <span class="math display">
+F(i) =\begin{cases}
+1 , &amp;i = 1 \text{ or } i = 2,\\
+F(i-1)+F(i-2), &amp;\text{else}.
+\end{cases}
+</span> In terms of code,</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">def</span> fib(n):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">1</span> <span class="kw">or</span> n <span class="op">==</span> <span class="dv">2</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    <span class="cf">return</span> fib(n<span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> fib(n<span class="op">-</span><span class="dv">2</span>)</span></code></pre></div>
+<p>The corresponding recurrence is <span class="math display">
+T(n) = T(n-1) + T(n-2) + \Theta(1) \in \Theta(1.6^n).
+</span> <img src="/assets/image-20201107121537378.png" alt="image-20201107121537378" /></p>
+<p>Looking at the recursive tree, we see there is significant overlap of the base cases being recalculated. For example, <span class="math inline">F(3)</span> is calculated three times in the calculation of <span class="math inline">F(6)</span>. The key idea is instead of recomputing these, we can store the calculations in an array and look it up later.</p>
+<p>We can implement dynamic programming using arrays:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">def</span> fib_dyn(n):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>    T <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> n</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    T[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    T[<span class="dv">2</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, n<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>        T[i] <span class="op">=</span> T[i<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> T[i<span class="op">-</span><span class="dv">2</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>    <span class="cf">return</span> T[n]</span></code></pre></div>
+<p>The array stores the intermediate results and this obviously runs in time <span class="math inline">\Theta(n)</span>.</p>
+<p>Alternatively, we can implement this using memoisation with a global variable <span class="math inline">T</span>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">def</span> fib_init(N):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    T <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> N</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>    T[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>    T[<span class="dv">2</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>    </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="kw">def</span> fib_memo(n):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>    <span class="cf">if</span> T[n] <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>        T[n] <span class="op">=</span> fib_memo(n<span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> fib_memo(n<span class="op">-</span><span class="dv">2</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>    <span class="cf">return</span> T[n]</span></code></pre></div>
+<h2 id="general-principle">General principle</h2>
+<p>If</p>
+<ul>
+<li>the problem has the optimal substructure property, and</li>
+<li>its recursive solution has overlapping subproblems, then</li>
+</ul>
+<p>a dynamic programming solution may apply. The benefit of this is we get a much more efficient solution at the loss of some elegance.</p>
+<h2 id="longest-common-subsequence">Longest common subsequence</h2>
+<p>Suppose we have two strings and we want to find the longest (not necessarily contiguous) subsequence of characters shared between the two strings. For example, <span class="math display">
+\begin{aligned}
+S_1 &amp;= \text{A B C B C} \\ 
+S_2 &amp;= \text{C A B B D}
+\end{aligned}
+</span> and here, <span class="math inline">\operatorname*{LCS}(S_1, S_2) = \text{ABB}</span>. This has applications in gene sequencing, file <code>diff</code>, and more.</p>
+<p><strong>Assume</strong> we have already solved a smaller subproblem. First, we will develop a recursive description of LCS.</p>
+<p>Suppose we know the LCS of S1 = “ABCBC” and S2 = “CABBD”. Then, what is the LCS of <em>S1.E</em> and <em>S2.E</em>? If we add the same character to both, then the LCS will be the same LCS but with E appended to the end, i.e. <em>LCS(S1, S2).E</em>.</p>
+<p>What if we added different letters? Note that LCS(S1.X, S2.Y) is <em>not necessarily</em> LCS(S1, S2). We need to be careful if S2 already contains an X, for example. More formally, to calculate LCS(S1.X, S2.Y) where X is not Y we need to recursively look at both possibilities: <span class="math display">
+\begin{aligned}
+\operatorname*{LCS}(S_1.X, S_2.Y)=\max\{\operatorname*{LCS}(S_1.X, S_2),\ \operatorname*{LCS}(S_1, S_2.Y)\}
+\end{aligned}
+</span> under the assumption we already have the solutions to smaller subproblems.</p>
+<p>The base case is if at least one of the argument strings is empty, the LCS is empty.</p>
+<p>Below, we put it all together and return the length of the string instead of the string itself.</p>
+<figure>
+<img src="/assets/image-20201107145605147.png" alt="" /><figcaption>image-20201107145605147</figcaption>
+</figure>
+<p>In pseudocode, this can be elegantly written as</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">def</span> lcs_length_rec(s1, s2, i, j):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span> <span class="kw">or</span> j <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>    <span class="cf">if</span> s1[i] <span class="op">==</span> s2[j]:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>        <span class="cf">return</span> <span class="dv">1</span> <span class="op">+</span> lcs_length_rec(s1, s2, i<span class="op">-</span><span class="dv">1</span>, j<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>    <span class="cf">return</span> <span class="bu">max</span>(lcs_length_rec(s1, s2, i<span class="op">-</span><span class="dv">1</span>, j), lcs_length_rec(s1, s2, i, j<span class="op">-</span><span class="dv">1</span>))</span></code></pre></div>
+<p>Unfortunately, this is <span class="math inline">\Omega(2^{\min (n, m})</span>. We have solved an optimisation problem by finding optimal solutions to subproblems, so we can see it has the optimal substructure property.</p>
+<p>We can rewrite this using bottom-up dynamic programming and a <span class="math inline">n \times m</span> integer array, because the recursive function has two arguments with <span class="math inline">n</span> and <span class="math inline">m</span> distinct values. Filling in this matrix from the smaller indices (i.e. smaller <span class="math inline">i</span> and <span class="math inline">j</span>) to the larger indices will solve the problem, which runs in <span class="math inline">\Theta(nm)</span> time.</p>
+<h2 id="matrix-chain-multiplication">Matrix chain multiplication</h2>
+<p>Recall that to compute <span class="math inline">AB</span> where <span class="math inline">A</span> is <span class="math inline">p \times q</span> and <span class="math inline">B</span> is <span class="math inline">q \times r</span>, then this takes time <span class="math inline">pqr</span>. Although <span class="math display">
+M_1(M_2\cdot M_3) = (M_1\cdot M_2)M_3,
+</span> the grouping may have a significant impact on the number of operations needed.</p>
+<p>Suppose we have a sequence of matrices <span class="math inline">M_1, M_2, M_3, M_4</span> and need to evaluate their product. Matrix multiplication is not commutative but it is associative. What association minimises the total cost of multiplying these matrices? Assume that dimensions of adjacent matrices are compatible.</p>
+<p>Before we get started, how long would a naive solution take? How many ways are there of multiplying <span class="math inline">n</span> matrices together? Let this be <span class="math inline">N</span>. Writing out a few terms, <span class="math display">
+\begin{aligned}
+N(1) &amp;= N(2) =1\\
+N(3) &amp;= N(1) \times N(1)=2\\
+N(4) &amp;= N(1) \times N(3) + N(2) \times N(2) + N(3) \times N(1)=5
+\end{aligned}
+</span> In general, <span class="math display">
+N(n) = \sum_{i=1}^{n-1}N(i) \times N(n-i).
+</span> This is tricky, but to get a lower bound, we have <span class="math inline">N(1) = 1</span> so <span class="math display">
+\begin{aligned}
+N(n) \ge N(1) \times N(n-1) + N(n-1)\times N(1) = 2N(n-1)\in \Omega(2^n).
+\end{aligned}
+</span> This is not great, can we find a dynamic programming solution? First we need to express it as a recursive problem, then identify overlapping subproblems.</p>
+<h3 id="dynamic-programming">Dynamic programming</h3>
+<p><strong>Subproblems</strong>: Let <span class="math inline">C_{ij}</span> be the minimum cost of multiplying the matrices between <span class="math inline">i</span> and <span class="math inline">j</span>, i.e. <span class="math inline">M_1 M_{i+1}\ldots M_j</span>. The solution is given by <span class="math inline">C_1,n</span>.</p>
+<p><strong>Base cases:</strong> <span class="math inline">C_{ii}=0</span> for all <span class="math inline">i</span> because no operations are needed with a single matrix.</p>
+<p><strong>Recursive case:</strong> To compute <span class="math inline">C_{ij}</span>, we can split the matrices <span class="math inline">i</span> to <span class="math inline">j</span> into different groupings, with lengths <span class="math inline">a</span> and <span class="math inline">b</span> with <span class="math inline">a, b \ge 1</span> and <span class="math inline">a+b = j-i+1</span>. We take the minimum of the recursive cost of each of these groupings added with the upfront cost of multiplying the two resultant matrices.</p>
+<p>Specifically, <span class="math display">
+C_{ij} = \min \{\ C_{i,i+k} + C_{i+k+1,j} + p_{i-1}p_{k+1}p_{j} : k \in 1, \ldots, j-i+1\ \}.
+</span> This can be made slightly nicer by using <span class="math inline">i \le k &lt; j</span>. This is incredibly inefficient to compute directly (even worse than our lower bound above), but is the intuition we need.</p>
+<p>A key insight here is that <span class="math inline">C_{ij}</span> depends on <span class="math inline">C_{ij}</span> and <span class="math inline">C_{k+1,j}</span>. We can draw a matrix of <span class="math inline">C</span> and fill it <em>bottom-up</em> starting with the diagonals, corresponding to <span class="math inline">C_{ii}=0</span>.</p>
+    <p><small>Generated at 11/7/2020, 12:21:20 PM.</small></p>
+  </body>
+</html>
