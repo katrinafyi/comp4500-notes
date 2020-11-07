@@ -250,6 +250,33 @@
             		</li>
                 </ol>
             		</li>
+
+                    <li><a href="#lecture-7-dynamic-programming-2">Lecture 7 — Dynamic Programming 2</a>
+            
+                <ol>
+                    
+                    <li><a href="#all-pairs-shortest-paths">All-pairs shortest paths</a>
+            		</li>
+
+                    <li><a href="#recursive-formulation">Recursive formulation</a>
+            		</li>
+
+                    <li><a href="#floyd-warshall">Floyd-Warshall</a>
+            		</li>
+
+                    <li><a href="#johnsons-algorithm">Johnson’s algorithm</a>
+            		</li>
+
+                    <li><a href="#dp-vs-greedy-algorithms">DP vs greedy algorithms</a>
+            		</li>
+
+                    <li><a href="#activity-selection">Activity selection</a>
+            		</li>
+
+                    <li><a href="#knapsack-problem">Knapsack problem</a>
+            		</li>
+                </ol>
+            		</li>
                 </ol>
             </nav>
 </article>
@@ -714,7 +741,95 @@ p_1 = v_1 \to \cdots \to v_i
 <p>Vertices are visited in order of <em>priority</em> (for some definition of priority function). For example, the priority could be the weight (as in Prim’s) or the cumulative distance (as in Dijkstra’s).</p>
 <figure>
 <img src="/assets/image-20200908093707791.png" alt="" /><figcaption>image-20200908093707791</figcaption>
+</figure><h1>Lecture 7</h1>
+
+  <!--
+<header id="title-block-header">
+<h1 class="title">Lecture 7 — Dynamic Programming 2</h1>
+<p class="author">Kenton Lam</p>
+<p class="date">2020-11-07</p>
+</header>
+-->
+
+
+<h1 id="lecture-7-dynamic-programming-2">Lecture 7 — Dynamic Programming 2</h1>
+<h2 id="all-pairs-shortest-paths">All-pairs shortest paths</h2>
+<p>We want to find the shortest path between all pairs of nodes in a graph. Doing this naivlely with Dijkstra’s algorithm from each node is <span class="math inline">V</span> times of <span class="math inline">O(E + V \log V)</span> which is <span class="math inline">O(V^3)</span>. If we wanted to handle negative weights as well, we need to use Bellman-Ford which is <span class="math inline">V</span> times of <span class="math inline">O(V^3)</span>, so <span class="math inline">O(V^4)</span>.</p>
+<p>We can do better by solving APSP including negative weights in <span class="math inline">O(V^3)</span> using something called Floyd-Warshall.</p>
+<h2 id="recursive-formulation">Recursive formulation</h2>
+<p>Suppose there are <span class="math inline">N</span> vertices numbered <span class="math inline">1, \ldots, N</span> and the graph is represented as an adjacency matrix where the weight from a vertex to itself is 0 and no edge is infinity.</p>
+<p>Recursively defining this problem, a path from <span class="math inline">i</span> to <span class="math inline">j</span> is either:</p>
+<ul>
+<li>an empty path if <span class="math inline">i = j</span> of <span class="math inline">\langle i \rangle</span>, or</li>
+<li>a path with more than one edge which is made up of a path <span class="math inline">p</span> from <span class="math inline">i</span> to some <span class="math inline">k</span> and an edge <span class="math inline">(k, j)</span>.</li>
+</ul>
+<p>The weight of this path in total is <span class="math inline">\operatorname*{weight}(p) + \operatorname*{weight}(k, j)</span>. The key insight is that if the shortest path <span class="math inline">\langle i, \ldots, k, j \rangle</span> has <span class="math inline">m</span> edges, then the path from <span class="math inline">i</span> to <span class="math inline">k</span> has at most <span class="math inline">m-1</span> edges and it is a <em>shortest</em> path from <span class="math inline">i</span> to <span class="math inline">k</span>.</p>
+<p>Defining this recursively, let <span class="math inline">\operatorname*{shortestPath}(i, j)^m</span> or <span class="math inline">s(i, j)^m</span> be the weight of the shortest path from <span class="math inline">i</span> to <span class="math inline">j</span> using at most <span class="math inline">m</span> edges. As a result,</p>
+<ul>
+<li><span class="math inline">s(i, j)^0</span> is 0 if <span class="math inline">i=j</span> or <span class="math inline">\infty</span> otherwise, and</li>
+<li><span class="math inline">s(i, j)^m = \min_{k \in V} (s(i, k)^{m-1}+w(k, j))</span>.</li>
+</ul>
+<p>Therefore, <span class="math inline">s(i, j)^1</span> is just the weight from <span class="math inline">i</span> to <span class="math inline">j</span>. We can use a <em>three-dimensional</em> array for the three arguments. This matrix will have dimensions <span class="math inline">n \times n \times n</span>. The pseudocode below would run in time <span class="math inline">\Theta(n^4)</span>.</p>
+<figure>
+<img src="/assets/image-20201107200932716.png" alt="" /><figcaption>image-20201107200932716</figcaption>
 </figure>
-    <p><small>Generated at 9/13/2020, 1:24:16 AM.</small></p>
+<p>In fact, we don’t need to calculate for all <span class="math inline">m</span>. As a slight improvement, we can double <span class="math inline">m</span> at each step while still solving the problem. This gives us an asymptotic tight bound of <span class="math inline">\Theta(n^3 \log n)</span>.</p>
+<h2 id="floyd-warshall">Floyd-Warshall</h2>
+<p>Why did we define our subproblems in terms of path length? What if we defined it in terms of which intermediate nodes were in the path?</p>
+<p>Let <span class="math inline">s(i,j,k)</span> be the weight of the shortest path from <span class="math inline">i</span> to <span class="math inline">j</span> using intermediate vertices <span class="math inline">1, \ldots, k</span>. Then, to extend <span class="math inline">k</span> to <span class="math inline">k+1</span>, we just need to consider if the path from <span class="math inline">i</span> to <span class="math inline">j</span> via <span class="math inline">k+1</span> is shorter than the previous shortest path. Specifically, <span class="math display">
+\begin{aligned}
+s(i, j, 0) &amp;= w(i, j) \\ 
+s(i, j, k+1) &amp;= \min \{s(i, j, k),\ s(i, k+1, k) + s(k+1, j,k)\}.
+\end{aligned}
+</span> This removes the need to minimise over <span class="math inline">V</span>, significantly speeding up the algorithm. The code below runs in <span class="math inline">\Theta(n^3)</span> where <span class="math inline">n</span> is the number of vertices.</p>
+<figure>
+<img src="/assets/image-20201107201907760.png" alt="" /><figcaption>image-20201107201907760</figcaption>
+</figure>
+<p>The base case is <span class="math inline">D^{(0)}</span> which is just the weights of the graph.</p>
+<figure>
+<img src="/assets/image-20201107202104051.png" alt="" /><figcaption>image-20201107202104051</figcaption>
+</figure>
+<p>Note that when filling in the matrix <span class="math inline">D^{(1)}</span>, the 1 column and row stays constant because these are paths ending or starting at <span class="math inline">1</span> and the shortest path will not contain <span class="math inline">1</span> as an intermediate vertex.</p>
+<p>To fill in the <span class="math inline">i,j</span>-th cell of <span class="math inline">D^{(1)}</span>, use the minimum of <span class="math inline">D^{(0)}_{ij}</span> and <span class="math inline">D^{(0)}_{i1}+D^{(0)}_{1j}</span>, i.e. the path through node <span class="math inline">1</span>.</p>
+<figure>
+<img src="/assets/image-20201107202918825.png" alt="" /><figcaption>image-20201107202918825</figcaption>
+</figure>
+<h2 id="johnsons-algorithm">Johnson’s algorithm</h2>
+<p>This is <span class="math inline">\Theta(V^3)</span> worst case but for sparse graphs, it can be <span class="math inline">O(V^2 \log V)</span> using an adjacency list representation. The strategy is</p>
+<ul>
+<li>reweight to eliminate negative weight edges,</li>
+<li>add a new “source” vertex, then</li>
+<li>run Dijkstra’s algorithm from each node.</li>
+</ul>
+<p>This has relatively high overheads (constant factors).</p>
+<h2 id="dp-vs-greedy-algorithms">DP vs greedy algorithms</h2>
+<p>A dynamic programming solution usually applies to optimisation problems with optimal substructure property and overlapping subproblems.</p>
+<p>Some optimisation problems with optimal substructure have the <strong>greedy-choice property</strong>. That is, given a larger problem, we know which subproblem will lead to the optimal solution without explicitly computing all the subproblems. To solve the problem, we can make a greedy (locally optimal) choice.</p>
+<p>This is more efficient by making a greedy choice and solving only the chosen subproblem. If applicable, this can significantly reduce the runtime from dynamic programming because there are much fewer subproblems to solve.</p>
+<h3 id="examples-of-greedy-algorithms">Examples of greedy algorithms</h3>
+<p>For example, Prim’s algorithm works by selecting the minimum weight edge leaving the tree. Selecting the minimum weight edge is a greedy choice.</p>
+<p>Similarly, Kruskal’s minimum spanning tree algorithm is a greedy algorithm by selecting the minimum weight edge which does not create a cycle.</p>
+<p>Dijkstra’s algorithm is also a greedy algorithm by selecting the vertex with minimum distance from the priority queue.</p>
+<h2 id="activity-selection">Activity selection</h2>
+<p>Suppose we have a list of activities of the form (start, finish) and we want to choose a combination of these which are not overlapping and maximise the number of activities.</p>
+<p>Process:</p>
+<ol type="1">
+<li>Sort by finishing time in <span class="math inline">\Theta(n \log n)</span>.</li>
+<li>Add a compatible activity to the set, starting with the activity finishing first.</li>
+</ol>
+<p>This is possible because we surely want to choose the activity which finishes earliest to maximise possibilities at later points in time, regardless of the start time. We do not care to maximise time spent doing activities, only the number of activities done.</p>
+<p>The loop is <span class="math inline">\Theta(n)</span> so the initial sort dominates the runtime with <span class="math inline">\Theta(n \log n)</span>.</p>
+<h2 id="knapsack-problem">Knapsack problem</h2>
+<p>Suppose we have a set of items each with a value <span class="math inline">v</span> and weight <span class="math inline">w</span> and we need to fill a knapsack while maximising the value such that the total weight is no more than <span class="math inline">W</span>.</p>
+<p>Here are two variants:</p>
+<ul>
+<li>fractional knapsack where we can take fractions of items, and</li>
+<li>binary knapsack where we can only take all or none of a particular item.</li>
+</ul>
+<p>In <em>fractional knapsack</em>, the greedy choice is just to fill the knapsack with the item which has the highest value to weight ratio. This does not work for binary knapsack.</p>
+<figure>
+<img src="/assets/image-20201107210131460.png" alt="" /><figcaption>image-20201107210131460</figcaption>
+</figure>
+    <p><small>Generated at 11/7/2020, 12:18:20 PM.</small></p>
   </body>
 </html>
