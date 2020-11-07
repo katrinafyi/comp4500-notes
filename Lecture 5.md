@@ -95,7 +95,7 @@ This is a generalisation of Dijkstra's algorithm but runs in much slower time. I
 
 ## Priority first search
 
-This is a generalisation including Dijkstra's algorithm and Prim's algorithm for MST. 
+This is a generalisation including **Dijkstra's algorithm** and **Prim's algorithm** for MST. 
 
 Vertices are visited in order of _priority_ (for some definition of priority function). For example, the priority could be the weight (as in Prim's) or the cumulative distance (as in Dijkstra's).
 
