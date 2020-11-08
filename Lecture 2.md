@@ -102,7 +102,7 @@ T(n) = T(\lfloor n/2 \rfloor) + T(\lceil n/2 \rceil) + 1
 &=cn+1 
 \end{aligned}
 $$
-which is not $\le cn$, so we cannot prove it this way! We can solve this problem by _strenghtening the guess_, via subtracting a lower order term. Specifically, we assume that $T(n) \le cn-b$ for $b>0$. This does not affect the asymptotic bound but with this stronger assumption, we are able to probe a stronger result.
+which is not $\le cn$, so we cannot prove it this way! We can solve this problem by strengthening the guess_, via subtracting a lower order term. Specifically, we assume that $T(n) \le cn-b$ for $b>0$. This does not affect the asymptotic bound but with this stronger assumption, we are able to probe a stronger result.
 
 **Note:** In the inductive step, we need to be very precise. We need to prove that $T(n) \le cn$ very carefully, something like $cn + n = O(n)$ is not good enough.
 
