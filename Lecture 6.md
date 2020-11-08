@@ -169,4 +169,9 @@ C_{ij} = \min \{\ C_{i,i+k} + C_{i+k+1,j} + p_{i-1}p_{k+1}p_{j} : k \in 1, \ldot
 $$
 This can be made slightly nicer by using $i \le k < j$. This is incredibly inefficient to compute directly (even worse than our lower bound above), but is the intuition we need.
 
-A key insight here is that $C_{ij}$ depends on $C_{ij}$ and $C_{k+1,j}$. We can draw a matrix of $C$ and fill it _bottom-up_ starting with the diagonals, corresponding to $C_{ii}=0$.
+A key insight here is that $C_{ij}$ depends on $C_{ij}$ and $C_{k+1,j}$. We can draw a matrix of $C$ and fill it _bottom-up_ starting with the diagonals, corresponding to $C_{ii}=0$. This gives us $\Theta(n^3)$ runtime.
+
+![image-20201108183124987](assets/image-20201108183124987.png)
+
+![image-20201108183324349](assets/image-20201108183324349.png)
+
