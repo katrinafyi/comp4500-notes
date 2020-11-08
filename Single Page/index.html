@@ -161,6 +161,39 @@
                 </ol>
             		</li>
 
+                    <li><a href="#lecture-10-randomised-algorithms">Lecture 10 — Randomised Algorithms</a>
+            
+                <ol>
+                    
+                    <li><a href="#average-case-analysis">Average case analysis</a>
+            		</li>
+
+                    <li><a href="#randomised-algorithms">Randomised algorithms</a>
+            		</li>
+
+                    <li><a href="#quicksort">Quicksort</a>
+            		</li>
+
+                    <li><a href="#biased-random">Biased random</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#lecture-11-revision">Lecture 11 — Revision</a>
+            
+                <ol>
+                    
+                    <li><a href="#topics">Topics</a>
+            		</li>
+
+                    <li><a href="#exam">Exam</a>
+            		</li>
+
+                    <li><a href="#strategy">Strategy</a>
+            		</li>
+                </ol>
+            		</li>
+
                     <li><a href="#recursive-functions">Recursive functions</a>
             
                 <ol>
@@ -295,6 +328,57 @@
             		</li>
                 </ol>
             		</li>
+
+                    <li><a href="#lecture-8-amortised-analysis">Lecture 8 — Amortised Analysis</a>
+            
+                <ol>
+                    
+                    <li><a href="#amortised-analysis">Amortised analysis</a>
+            		</li>
+
+                    <li><a href="#stack">Stack</a>
+            		</li>
+
+                    <li><a href="#binary-counter">Binary counter</a>
+            		</li>
+
+                    <li><a href="#array-resizing">Array resizing</a>
+            		</li>
+
+                    <li><a href="#potential-method-1">Potential method</a>
+            		</li>
+                </ol>
+            		</li>
+
+                    <li><a href="#lecture-9-computational-complexity">Lecture 9 — Computational Complexity</a>
+            
+                <ol>
+                    
+                    <li><a href="#polynomial-time">Polynomial time</a>
+            		</li>
+
+                    <li><a href="#examples">Examples</a>
+            		</li>
+
+                    <li><a href="#background">Background</a>
+            		</li>
+
+                    <li><a href="#nondeterministic-polynomial-np">Nondeterministic polynomial (NP)</a>
+            		</li>
+
+                    <li><a href="#np-hard">NP-Hard</a>
+            		</li>
+
+                    <li><a href="#np-complete">NP-Complete</a>
+            		</li>
+
+                    <li><a href="#overview">Overview</a>
+            		</li>
+
+                    <li><a href="#approximations">Approximations</a>
+            		</li>
+                </ol>
+            		</li>
                 </ol>
             </nav>
 </article>
@@ -375,6 +459,184 @@
 <li><span class="math inline">f(n) \in \Theta(g(n))</span> if <span class="math inline">0 &lt; c &lt; \infty</span>, and</li>
 <li>$f(n) (g(n)) $ if <span class="math inline">c &gt; 0</span>.</li>
 </ul></li>
+</ul><h1>Lecture 10</h1>
+
+  <!--
+<header id="title-block-header">
+<h1 class="title">Lecture 10 — Randomised Algorithms</h1>
+<p class="author">Kenton Lam</p>
+<p class="date">2020-11-08</p>
+</header>
+-->
+
+
+<h1 id="lecture-10-randomised-algorithms">Lecture 10 — Randomised Algorithms</h1>
+<p>We will talk about probabilistic analysis and randomised algorithms, with a focus on quicksort.</p>
+<h2 id="average-case-analysis">Average case analysis</h2>
+<p>Although we focus on worst-case complexities, there are also best case and average cases. The average case is the sum of each possible running time weighted by its probability. <span class="math display">
+\begin{aligned}
+T_{\text{worst}}(n) &amp;= \max_{|x|=n}T(n) \\ 
+T_{\text{best}}(n) &amp;= \min_{|x|=n}T(n) \\ 
+T_{\text{average}}(n) &amp;= \sum_{|x|=n}T(x)P(x)\\ 
+\end{aligned}
+</span></p>
+<h3 id="hire-assistant">Hire assistant</h3>
+<p>Consider an algorithm which needs to hire candidates from a list and performs a hire when the current candidate is better than the current hire. In pseudocode,</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">def</span> hire_assistant(n):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    best <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>        interview(candidate[j]) <span class="co"># cost c_i</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>        <span class="cf">if</span> candidate[j] <span class="op">&gt;</span> best:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>            best <span class="op">=</span> j</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>            hire(candidate[j])  <span class="co"># cost c_h</span></span></code></pre></div>
+<p>Let <span class="math inline">n</span> be the total number of candidates and <span class="math inline">m</span> be the number of hires made. The actual cost is <span class="math inline">nc_i + mc_h</span> and the worst case is if we hire everyone so <span class="math inline">n=m</span> and the cost is <span class="math inline">n(c_i+c_h)</span>. What is the average case?</p>
+<p>We need to consider the probability of hiring the <span class="math inline">j</span>-th candidate. Assume the candidates are in random order and so any of the first <span class="math inline">j</span> candidates are equally likely to be the best. The probability the <span class="math inline">j</span>-th candidate is the best of the first <span class="math inline">j</span> candidates is <span class="math inline">1/j</span>.</p>
+<p>Thus, the average cost of hiring candidates is <span class="math display">
+c_h\sum_{j=1}^n \frac 1 j = c_h \ln n + O(1)
+</span> which is much better than the worst-case of <span class="math inline">n c_h</span>.</p>
+<h2 id="randomised-algorithms">Randomised algorithms</h2>
+<p>The algorithm above is a deterministic algorithm.</p>
+<p>A <strong>randomised algorithm</strong> is one where its behaviour is determined by both its inputs and some random number generator.</p>
+<ul>
+<li>For deterministic algorithms, we can calculate an average running time from the distribution of inputs.</li>
+<li>For non-deterministic (randomised) algorithms, we need to calculate the <em>expected</em> running time without being to make an assumption on the probability distribution of the inputs.</li>
+</ul>
+<h3 id="randomly-permuting-arrays">Randomly permuting arrays</h3>
+<p>How can we randomise the hire assistant algorithm? We want a uniform random permutation, so a <span class="math inline">1/n!</span> chance for each permutation of the <span class="math inline">n</span> elements in <span class="math inline">A</span>.</p>
+<p>A simple way to do this is the algorithm below.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">def</span> permute_by_sort(A):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>    n <span class="op">=</span> <span class="bu">len</span>(A)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    P <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> n</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>        P[i] <span class="op">=</span> randint(<span class="dv">1</span>, n<span class="op">**</span><span class="dv">3</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>    <span class="co"># sort A using P as the keys</span></span></code></pre></div>
+<p>This produces a unique random permutation, so long as the chosen keys are unique. The probability of keys being unique is <span class="math display">
+\frac {n^3}{n^3} \times \frac{n^3-1}{n^3} \times \frac{n^3 - 2}{n^3}\times \cdots \times \frac{n^3-n}{n^3} \ge \left( 1 - \frac 1 {n^2} \right)^n \ge 1 - \frac 1 n.
+</span> This is reasonably non-zero so is not good enough. In fact, this gets closer to <span class="math inline">1</span> as <span class="math inline">n</span> becomes large.</p>
+<p>Alternatively, we can permute it by randomising in-place.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">def</span> randomise_in_place(A):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    n <span class="op">=</span> <span class="bu">len</span>(A)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>        <span class="co"># randomly swap i with an element to the right</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>        swap(A[i], A[randint(i, n)]) </span></code></pre></div>
+<p>A <span class="math inline">k</span>-permutation of a set of <span class="math inline">n</span> elements is a sequence containing <span class="math inline">k</span> of the <span class="math inline">n</span> elements. The invariant at <span class="math inline">i</span> is that <span class="math inline">A[1..i]</span> contains any <span class="math inline">i</span>-permutation of <span class="math inline">A</span> with probability <span class="math inline">(n-i)!/n!</span>. Before the first element, <span class="math inline">A[1..0]</span> contains a <span class="math inline">0</span>-permutation with probability <span class="math inline">1</span> (trivially).</p>
+<p>Assume that the invariant holds at <span class="math inline">i-1</span>. We must show that the invariant holds at <span class="math inline">i</span>.</p>
+<figure>
+<img src="/assets/image-20201108170034381.png" alt="" /><figcaption>image-20201108170034381</figcaption>
+</figure>
+<p>At the termination of the algorithm, <span class="math inline">A[1..n]</span> will contain any <span class="math inline">n</span>-permutation with probability <span class="math display">
+\frac{(n-n)!}{n!}=\frac 1 {n!},
+</span> so each of the <span class="math inline">1/n!</span> possible permutations is equally likely.</p>
+<h2 id="quicksort">Quicksort</h2>
+<p>Quicksort is great because it’s “pretty fast” “most of the time”. It preprocesses the array into partitions based of less than or greater than some pivot value. In pseudocode:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">def</span> quicksort(A, p, r):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    <span class="cf">if</span> p <span class="op">&lt;</span> r:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>        q <span class="op">=</span> partition(A, p, r)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>        quicksort(A, p, q<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>        quicksort(A, q<span class="op">+</span><span class="dv">1</span>, r)</span></code></pre></div>
+<p>In contrast, mergesort postprocesses sorted subarrays into a larger sorted array.</p>
+<p>The algorithms are very similar but differ in how they work with the recursive calls.</p>
+<p>A visual representation of the partition algorithm is below.</p>
+<figure>
+<img src="/assets/image-20201108171447197.png" alt="" /><figcaption>image-20201108171447197</figcaption>
+</figure>
+<p>The performance of quicksort depends very much on the element chosen as the pivot. The best and average cases are <span class="math inline">\Theta(n \log n)</span> but the worst case is terrible at <span class="math inline">\Theta(n^2)</span>. With the partitioning scheme above, the worst case occurs if the array is already sorted or reverse sorted. This is actually where insertion sort has its best case.</p>
+<p>How can we do this average case analysis? Later on, how can we randomise it so we get expected time complexity of <span class="math inline">n \log n</span> always?</p>
+<p>There are some cases with different performance: <span class="math display">
+\begin{aligned}
+q=\left\lfloor\frac{p+q}2\right\rfloor &amp;\implies T(n) = 2T(n/2) + \Theta(n) &amp; \in \Theta(n \log n) \\ 
+q=p+\frac{r-p}c &amp;\implies T(n) = T(n/c) + T((c-1)n/c) + \Theta(n) &amp;\in \Theta(n \log n) \\ 
+q=p &amp;\implies T(n) = T(n-1) + T(0) + \Theta(n) &amp;\in \Theta(n^2)
+\end{aligned}
+</span> Interestingly, when there is a proportional split as in the second case, the running time is still (asymptotically) optimal.</p>
+<h3 id="analysis-of-quicksort">Analysis of quicksort</h3>
+<p>We assume that each permutation is equally likely. We need to consider the total number of comparisons done by partition over <em>all</em> recursive calls of quicksort. Label the elements of <span class="math inline">A</span> as <span class="math inline">z_1, \ldots, z_n</span> in sorted order. Let <span class="math inline">Z_{ij}</span> be the <span class="math inline">i</span>-th to <span class="math inline">j</span>-th elements in sorted order.</p>
+<p>Consider an array of <span class="math inline">1..10</span> in any order and assume the first pivot is 4. The array would be partitioned into <span class="math inline">\{1, 2, 3\}</span> and <span class="math inline">\{5, 6, 7, 8, 9, 10\}</span>. In the partitioning, we compare 4 to every other element. At this point, nothing in the left set will ever be compared to an element of the right set.</p>
+<p>For any elements <span class="math inline">z_i</span> and <span class="math inline">z_j</span>, once a pivot <span class="math inline">x</span> is chosen such that <span class="math inline">z_i &lt; x &lt; z_j</span>, then <span class="math inline">z_i</span> will never be compared to <span class="math inline">z_j</span> in the future.</p>
+<p>If <span class="math inline">z_i</span> is chosen as a pivot before an other element in <span class="math inline">Z_{ij}</span>, it will be compared to every other element in <span class="math inline">Z_{ij}</span>. Similarly for <span class="math inline">z_j</span>. This, <span class="math inline">z_i</span> and <span class="math inline">z_j</span> are compared if and only if the first element chosen as pivot from <span class="math inline">Z_{ij}</span> is either <span class="math inline">z_i</span> or <span class="math inline">z_j</span>. Any element in <span class="math inline">Z_{ij}</span> is equally likely and <span class="math inline">Z_{ij}</span> has <span class="math inline">j-i+1</span> equally likely elements.</p>
+<p>Each pair of elements is compared at most once because in partition, elements are compared with the pivot only at most once, and an element is only used as a pivot in at most one partition step. <span class="math display">
+\begin{aligned}
+P(z_i \text{ compared to }z_j)&amp;=P(z_i\text{ or }z_j \text{ is first pivot chosen from } Z_{ij}) \\ 
+&amp;= \frac {1}{j-i+1} + \frac {1}{j-i+1} \\ 
+&amp;= \frac {2}{j-i+1}
+\end{aligned}
+</span> Now, we just need to sum over all pairs of possible comparisons. Then, <span class="math display">
+\begin{aligned}
+\sum_{i=1}^{n-1}\sum_{j=i+1}^nP(z_i \text{ compared to }z_j)  
+&amp;= \sum_{i=1}^{n-1}\sum_{j=i+1}^n\frac 2 {j-i+1} \\ 
+&amp;= \sum_{i=1}^{n-1}\sum_{k=1}^{n-i}\frac 2 {k+1} \\ 
+&amp;&lt;  \sum_{i=1}^{n-1}\sum_{k=1}^{n}\frac 2 {k} \\ 
+&amp;\in \sum_{i=1}^{n-1}O(\log n) \in O(n \log n)
+\end{aligned}
+</span> This is assuming the inputs are evenly distributed, but this is not likely in practice. Usually, we will get given arrays which are almost sorted.</p>
+<p>We can randomise it which ensures that the input arrays are all evenly distributed by randomly permuting the array before sorting it. Random permuting can be done in <span class="math inline">\Theta(n)</span>. In fact, we don’t even need to permute the entire array. We can just randomly choose a pivot from a random location.</p>
+<p>Either method will give us <strong>expected running time</strong> of <span class="math inline">\Theta(n \log n)</span> and the worst case will be unlikely.</p>
+<h2 id="biased-random">Biased random</h2>
+<p>In random algorithms, we typically assume we have access to some fair coin via RNG. In practice, we may not have a fair coin. We might have a biased coin with probability <span class="math inline">p \ne 1/2</span>. If all we have is a biased coin, how can we implement a fair coin which returns 0 or 1 with equal probability?</p>
+<p>Suppose we flip the coin twice. The probability of both 0 is <span class="math inline">p^2</span>. The probability of 0 then 1 or 1 then 0 is <span class="math inline">p(1-p)</span> and the probability of both 1 is <span class="math inline">(1-p)^2</span>. Then, the probability that <span class="math inline">a=0</span> <em>given</em> <span class="math inline">a \ne b</span> is <span class="math inline">1/2</span>.</p>
+<p>We can continue until we get 0 and 1 or 1 and 0, returning an arbitrary one when they differ.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">def</span> random():</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>    a <span class="op">=</span> biased_random()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>    b <span class="op">=</span> biased_random()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>    <span class="cf">while</span> a <span class="op">==</span> b:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>        a <span class="op">=</span> biased_random()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>        b <span class="op">=</span> biased_random()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>    <span class="cf">return</span> a</span></code></pre></div>
+<p>The running time depends on <span class="math inline">p</span> and we have <em>almost certain</em> termination.</p>
+<p>Let <span class="math inline">\alpha=2p(1-p)</span> be the probability that <span class="math inline">a \ne b</span>. The probability of terminating after <span class="math inline">0</span> iterations is just <span class="math inline">\alpha</span>. After once, it is <span class="math inline">\alpha(1-\alpha)</span>. Continuing, the probability of terminating after exactly <span class="math inline">i</span> iterations is <span class="math display">
+(1-\alpha)^i\alpha.
+</span> The expected number of iterations is the sum of <span class="math inline">i</span> multiplied by the probability of each, <span class="math display">
+\begin{aligned}
+\sum_{i=0}^\infty i ((1-\alpha)^i\alpha) &amp;= \alpha \sum_{i=0}^\infty i (1-\alpha)^i \\ 
+&amp;= \frac \alpha{(1-(1-\alpha))^2} \\ 
+&amp;= \frac \alpha{\alpha^2} = \frac 1 \alpha
+\end{aligned}
+</span> This directly gives us the expected running time.</p><h1>Lecture 11</h1>
+
+  <!--
+<header id="title-block-header">
+<h1 class="title">Lecture 11 — Revision</h1>
+<p class="author">Kenton Lam</p>
+<p class="date">2020-11-08</p>
+</header>
+-->
+
+
+<h1 id="lecture-11-revision">Lecture 11 — Revision</h1>
+<p>The goal of this course has been to analyse, critique, design, and implement advanced data structures and algorithms. When faced with a problem, how can we convert it to a solvable problem in an efficient way?</p>
+<p>Questions will require some amount of thinking and analysing instead of directly application.</p>
+<h2 id="topics">Topics</h2>
+<ul>
+<li>Measuring and comparing efficiency</li>
+<li>Representing problems as graphs</li>
+<li>Dynamic programming</li>
+<li>Greedy algorithms</li>
+<li>Probabilistic analysis and randomised algorithms</li>
+</ul>
+<p>We also learned about complexity classes, so we can</p>
+<ul>
+<li>understand the limits of our knowledge (P vs NP), and</li>
+<li>know types of problems which may not have an efficient solution.</li>
+</ul>
+<h2 id="exam">Exam</h2>
+<p>The exam will be <strong>2 hours + 30 minutes</strong>, with the 30 minutes for preparing and uploading the exam document. Some general directions are:</p>
+<ul>
+<li><p>Answer all questions.</p></li>
+<li><p>100 marks.</p></li>
+<li><p>Worth 50% or 60%, whichever results in the higher final result.</p></li>
+<li><p>Open book.</p></li>
+<li><p><strong>5 questions.</strong></p></li>
+<li><p>Available for 2 hours from 4pm.</p></li>
+</ul>
+<p>There is a penalty for late submissions of 20% for 1 to 15 minutes late, 50% for up to 30 minutes, and 100% for more than 30 minutes late. The penalty is applied on the marks received, not on the total available marks.</p>
+<h2 id="strategy">Strategy</h2>
+<ul>
+<li>Start with easiest questions (it should be easier than the midsem).</li>
+<li>Don’t waste time searching online for answers.</li>
+<li><strong>Read answers carefully and be comprehensive with answers.</strong></li>
+<li>Even if you do not know the answers, <em>try</em>.</li>
+<li>Nothing written is useless.</li>
+<li>Exam is designed to test problem solving. Do not share answers.</li>
 </ul><h1>Lecture 2</h1>
 
   <!--
@@ -455,7 +717,7 @@ T(n) = T(\lfloor n/2 \rfloor) + T(\lceil n/2 \rceil) + 1
 &amp;\le c(\lfloor n/2 \rfloor) + c(\lceil n/2 \rceil) + 1  \\ 
 &amp;=cn+1 
 \end{aligned}
-</span> which is not <span class="math inline">\le cn</span>, so we cannot prove it this way! We can solve this problem by <em>strenghtening the guess</em>, via subtracting a lower order term. Specifically, we assume that <span class="math inline">T(n) \le cn-b</span> for <span class="math inline">b&gt;0</span>. This does not affect the asymptotic bound but with this stronger assumption, we are able to probe a stronger result.</p>
+</span> which is not <span class="math inline">\le cn</span>, so we cannot prove it this way! We can solve this problem by strengthening the guess_, via subtracting a lower order term. Specifically, we assume that <span class="math inline">T(n) \le cn-b</span> for <span class="math inline">b&gt;0</span>. This does not affect the asymptotic bound but with this stronger assumption, we are able to probe a stronger result.</p>
 <p><strong>Note:</strong> In the inductive step, we need to be very precise. We need to prove that <span class="math inline">T(n) \le cn</span> very carefully, something like <span class="math inline">cn + n = O(n)</span> is not good enough.</p>
 <h4 id="change-of-variables">Change of variables</h4>
 <p>Consider <span class="math display">
@@ -962,7 +1224,280 @@ s(i, j, k+1) &amp;= \min \{s(i, j, k),\ s(i, k+1, k) + s(k+1, j,k)\}.
 <p>In <em>fractional knapsack</em>, the greedy choice is just to fill the knapsack with the item which has the highest value to weight ratio. This does not work for binary knapsack.</p>
 <figure>
 <img src="/assets/image-20201107210131460.png" alt="" /><figcaption>image-20201107210131460</figcaption>
+</figure><h1>Lecture 8</h1>
+
+  <!--
+<header id="title-block-header">
+<h1 class="title">Lecture 8 — Amortised Analysis</h1>
+<p class="author">Kenton Lam</p>
+<p class="date">2020-11-07</p>
+</header>
+-->
+
+
+<h1 id="lecture-8-amortised-analysis">Lecture 8 — Amortised Analysis</h1>
+<h2 id="amortised-analysis">Amortised analysis</h2>
+<p>We’ve analysed algorithms “one-off”. However, we often use data structures and call their methods many times. Using different data structures can impact the running time of the algorithm.</p>
+<p>Amortised analysis is essentially looking at the average complexity or time used for a <em>series</em> of operations. It has origins from financial contexts, for example a mortgage’s cost is split across a much longer time period.</p>
+<p>Using naive analysis of a sequence of operations might assume the worst case all the time. In practice, the worst case may be very rare. Amortised analysis considers sequences of operations, typically those modifying a data structure.</p>
+<p>Some examples include Java’s ArrayList, ArrayDeque, and C++’s vector which have operations running in <em>amortised constant time</em>.</p>
+<h3 id="dynamic-table">Dynamic table</h3>
+<p>The most simple example is a dynamic table, which is capable of storing an unknown number of items by doubling its capacity when it is full. Typically, inserting is constant-time but sometimes a reallocation and copy is needed.</p>
+<p>The best-case is <span class="math inline">\Theta(1)</span> and worst-case is <span class="math inline">\Theta(n)</span> if resizing is necessary. To insert <span class="math inline">n</span> elements, the worst case would be <span class="math inline">\Theta(n^2)</span>? However, it is clear the <em>most</em> of the operations would be <span class="math inline">\Theta(1)</span>.</p>
+<p>Formally, we are analysing</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    insert(e[i])</span></code></pre></div>
+<p>for some sequence of items <span class="math inline">e</span>. The vast majority of the operations are constant-time, but how many are not? This will depend on <span class="math inline">i</span>.</p>
+<p>As a more precise analysis, we can let <span class="math inline">c_i</span> be the cost of the <span class="math inline">i</span>-th insertion which will be 1 most of the time but <span class="math inline">i</span> if <span class="math inline">i-1</span> was an exact power of 2.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">i</span></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>size</td>
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">c_i</span></td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>This is the <strong>aggregate method</strong> for amortised analysis. The cost of <span class="math inline">n</span> insertions is <span class="math display">
+\begin{aligned}
+\sum_{i=1}^n c_i \le n + \sum_{j=1}^{\lceil \lg n \rceil}2^{j-1} \le 3n = \Theta(n)
+\end{aligned}
+</span> The average cost of each insert operation is <span class="math inline">\Theta(n) / n = \Theta(1)</span>. What if we start mixing insert and delete operations? In that case, we can no longer use this summation because the cost will be different depending on the order of inserts and deletes.</p>
+<h2 id="stack">Stack</h2>
+<p>Consider a stack with two operations: push and pop. Suppose we add a multipop operation:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">def</span> multipop(S, k):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>    <span class="cf">while</span> S <span class="kw">and</span> k <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>        pop(S)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>        k <span class="op">=</span> k <span class="op">-</span> <span class="dv">1</span></span></code></pre></div>
+<p>The multipop operation can be <span class="math inline">O(n)</span> if <span class="math inline">n=k</span>. Clearly, any sequence of <span class="math inline">n</span> stack operations must be <span class="math inline">O(n^2)</span>. However, we can get a better bound.</p>
+<p>We can use some details here:</p>
+<ul>
+<li>multipop only iterates while the stack is not empty, and</li>
+<li>each element is pushed and popped exactly once.</li>
+</ul>
+<p>We are interested in analysing a sequence of <span class="math inline">n</span> mixed operations:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    push(...) <span class="kw">or</span> pop(...) <span class="kw">or</span> multipop(...)</span></code></pre></div>
+<p>Two methods we could use here are:</p>
+<ul>
+<li>the accounting method, which focuses on the operations, or</li>
+<li>the potential method, which focuses on the data structure.</li>
+</ul>
+<h3 id="accounting-method">Accounting method</h3>
+<p>Consider the actual cost <span class="math inline">c_i</span> of each operation. This is 1 for push/pop and <span class="math inline">\min(\operatorname*{size}(S), k)</span> for multipop. We can assign an <em>amortised cost</em> <span class="math inline">\hat c_i</span> for each method as 2 for push and 0 for the others. Here, we add the cost of the eventual pop upfront in the push method, using the rule that an item is pushed then popped exactly once. Then, the cost of the pop is already “paid” in the pop so “cost” nothing.</p>
+<p>For any sequence of operations, the amortised cost must be an upper bound on the actual cost. We can use this in place of the complicated actual cost and say that a sequence of <span class="math inline">n</span> operations has amortised time <span class="math inline">O(n)</span>.</p>
+<p>To prove this, we must show that running total of the amortised costs is greater than or running total of the sum of the actual costs. That is, for all sequences and <span class="math inline">n</span>, <span class="math display">
+\sum_{i=1}^n \hat c_i \ge \sum_{i=1}^n c_i
+</span> Intuitively, the extra “credit” in the push pays for any later (multi)pop.</p>
+<h3 id="potential-method">Potential method</h3>
+<p>This is a third method we can use. It finds a <strong>potential function</strong> on the data structure. The amortised cost is the actual cost plus change in potential. We write this as <span class="math display">
+\hat c_i = c_i + \Phi(D_i) - \Phi(D_{i-1}).
+</span> As before, the amortised cost must be an upper bound on the actual cost. Thus, <span class="math display">
+\sum_{i=1}^n \hat c_i = \sum_{i=1}^n (c_i + \Phi(D_i)-\Phi(D_{i-1})) = \sum_{i=1}^n c_i + \Phi(D_n) - \Phi(D_0).
+</span> We need to show that <span class="math inline">\Phi(D_i) \ge \Phi(D_0)</span> for all <span class="math inline">i</span>. This can be trivially satisfied if <span class="math inline">\Phi(D_0)=0</span> and <span class="math inline">\Phi(D_i) \ge 0</span>.</p>
+<p>Returning to our stack, the actual costs are <span class="math inline">1</span>, <span class="math inline">1</span>, and <span class="math inline">k&#39;</span>. Define <span class="math inline">\Phi(S)</span> as the number of elements in the stack and the change in potential is <span class="math inline">1</span> for push, <span class="math inline">-1</span> for pop, and <span class="math inline">-k&#39;</span> for multipop.</p>
+<p>The amortised cost is the actual cost added to the change in potential, giving us push is 2, pop is 0, and multipop is 0. Of course, <span class="math inline">\Phi(D_0)=0</span> because the stack starts out empty so the requirement is trivially satisfied. Thus, all stack operations have constant amortised time.</p>
+<p>Here, this resulted in the same amortised costs as the accounting method.</p>
+<h2 id="binary-counter">Binary counter</h2>
+<p>Suppose we have a counter which counts by 1 in binary, from 0 to 1 to 10 and so on. The total cost is the number of bits flipped.</p>
+<p>This works by flipping all the rightmost 1 bits to 0, then set a 1 in the next place.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">def</span> increment(A, k):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>    <span class="cf">while</span> i <span class="op">&lt;</span> k <span class="kw">and</span> A[i] <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>        A[i] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>        i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>    <span class="cf">if</span> i <span class="op">&lt;</span> k:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>        A[i] <span class="op">=</span> <span class="dv">1</span></span></code></pre></div>
+<p>The worst case is if we have a chain of ones and this will take time <span class="math inline">n</span>, the length of <span class="math inline">A</span>. Doing <span class="math inline">n</span> increments would be <span class="math inline">n^2</span> then? Of course not!</p>
+<p>Let’s see how we can think of this.</p>
+<h3 id="aggregate-method">Aggregate method</h3>
+<p>We want to count the number of flips. After <span class="math inline">n</span> increments, the number of times bit <span class="math inline">i</span> is flipped is <span class="math inline">\lfloor n/2^i \rfloor</span>. Bit 0 flips every time, 1 flips every second time, 2 flips every 4th increment, and so on.</p>
+<figure>
+<img src="/assets/image-20201108000211444.png" alt="" /><figcaption>image-20201108000211444</figcaption>
 </figure>
-    <p><small>Generated at 11/7/2020, 12:24:41 PM.</small></p>
+<p>Hence, the total cost is <span class="math display">
+\sum_{i=0}^{k-1}\left\lfloor\frac n {2^i}\right\rfloor \le 
+\sum_{i=0}^{k-1}\frac n {2^i} &lt; n \sum_{i=0}^\infty \frac 1 {2^i} = 2n \in O(n).
+</span> The aggregate method is writing the actual cost using a summation.</p>
+<h3 id="accounting-method-1">Accounting method</h3>
+<p>The actual cost is the number of low-order 1s plus one for the final flip of 0 to 1.</p>
+<p>To determine the amortised cost, let each flip from 0 to 1 have amortised cost of 2 and let each flip from 1 to 0 have cost 0. The amortised cost of increment is then 2.</p>
+<p>We must show this is an upper bound on the actual cost. Flips from 1 to 0 must occur after that flip has already been flipped and hence paid for.</p>
+<h2 id="array-resizing">Array resizing</h2>
+<p>We return to this using the accounting method.</p>
+<h3 id="accounting-method-2">Accounting method</h3>
+<p>The actual cost is as before. We can charge a cost of 3 for the <span class="math inline">i</span>-th insertion which is made up of 1 for the insert, and 2 for later doubling (1 for copying itself and 1 for copying an older element). We need to account for old elements because their credit would already have been used in the previous doubling, so we only have spare money from the most recent half.</p>
+<p>This is essentially manually applying the cost upfront at each operation.</p>
+<p>The invariant is that the “bank balance” never drops below zero. This is the same as the sum of amortised costs being an upper bound for sum of actual costs.</p>
+<h2 id="potential-method-1">Potential method</h2>
+<p>We need to determine a potential function. Here, this can be <span class="math inline">\Phi(D_i)=2i - 2^{\lceil \log i \rceil}</span>. Assume that <span class="math inline">2^{\lceil \log 0 \rceil}=0</span> which trivially satisfies <span class="math inline">\Phi(D_0)=0</span> and <span class="math inline">\Phi(D_i) \ge 0</span>. This is essentially the same as a “bank balance” from before.</p>
+<p>The amortised cost of the <span class="math inline">i</span>-th insertion is <span class="math display">
+\begin{aligned}
+\hat c_i &amp;= c_i - \Phi(D_i)-\Phi(D_{i-1})  \\ 
+&amp;= \begin{cases}
+i, &amp; i-1\text{ is a power of 2}, \\ 
+1, &amp;\text{else},
+\end{cases}
++(2i-2^{\lceil \log i\rceil })
+-(2(i-1)-2^{\lceil \log (i-1)\rceil })
+\end{aligned}
+</span> Looking at each case, if <span class="math inline">i-1</span> is an exact power of <span class="math inline">2</span>, <span class="math display">
+\begin{aligned}
+\hat c_i &amp;= i+2 - 2^{\lceil \log i \rceil} + 2^{\lceil \log (i-1)\rceil} \\ 
+&amp;= i+2 - 2(i-1) + (i-1) \\ 
+&amp;= 3
+\end{aligned}
+</span> If <span class="math inline">i-1</span> is not an exact power of 2, the ceiling makes the power the same and so <span class="math display">
+\hat c_i=3.
+</span> Therefore, <span class="math inline">n</span> inserts take <span class="math inline">\Theta(n)</span> amortised time in the worst case.</p><h1>Lecture 9</h1>
+
+  <!--
+<header id="title-block-header">
+<h1 class="title">Lecture 9 — Computational Complexity</h1>
+<p class="author">Kenton Lam</p>
+<p class="date">2020-11-08</p>
+</header>
+-->
+
+
+<h1 id="lecture-9-computational-complexity">Lecture 9 — Computational Complexity</h1>
+<h2 id="polynomial-time">Polynomial time</h2>
+<p>We call polynomial time algorithms <strong>tractable</strong>. In practice, large polynomial algorithms are not tractable. However, if an algorithm has a polynomial-time solution, there is usually an <em>efficient</em> polynomial-time solution.</p>
+<p>For example, matrix multiplication has been improved from <span class="math inline">\Theta(N^3)</span> to something less.</p>
+<p>The class of problems solvable in polynomial time on a serial random-access machine (which we have been using) is the same as</p>
+<ul>
+<li>the polynomial-time problems on an abstract Turing machine, and</li>
+<li>the polynomial-time problems on a parallel computer when number of processors grows polynomially with input size.</li>
+</ul>
+<p>So the computational model we use to execute our algorithm is largely irrelevant for the analysis.</p>
+<p>Polynomials are <strong>closed</strong> under addition, multiplication, and composition. Thus, if the output of a polynomial-time algorithm is used as input for another polynomial-time algorithm, the resultant algorithm is also polynomial-time.</p>
+<h2 id="examples">Examples</h2>
+<p>Which problems have polynomial-time algorithms? Problems which look similar (in nature) may not be.</p>
+<p>We can find shortest paths from a single source in a directed graph in <span class="math inline">O(VE)</span> time, however the <em>longest</em> simple path between two vertices is difficult. Even determining if a simple path exists with at least a given number of vertices is difficult (NP-complete).</p>
+<p>An Euler tour in a connected directed graph is a cycle in which each edge of the graph is traversed exactly once. Finding an Euler tour can be done in <span class="math inline">O(E)</span> time. A Hamiltonian cycle in a graph is a simple cycle which contains all vertices in a graph. Determining <em>whether</em> a graph has a Hamiltonian cycle is NP-complete.</p>
+<h3 id="cnf-vs-3-cnf-satisfiability">2-CNF vs 3-CNF satisfiability</h3>
+<p>A boolean formula like <span class="math display">
+(x_1 \vee \neg x_2) \wedge (\neg x_1 \vee x_3) \wedge (\neg x_2 \vee \neg x_3)
+</span> may have a satisfying assignment of <span class="math inline">x_1, x_2, x_3</span> such that it evaluates to 1. The formula above does, e.g. 1 0 1.</p>
+<p>A boolean formula is in conjunctive normal form (CNF) if it is a conjunction (and) of clauses, each of which is a disjunction )or) of literals, where a literal is a variable or a negation. Any boolean formula can be converted to CNF.</p>
+<p>A <span class="math inline">k</span>-CNF formula is one where each disjunction (or) has exactly <span class="math inline">k</span> literals. The example above is 2-CNF. Determining whether a 3-CNF is satisfiable is NP-complete.</p>
+<h2 id="background">Background</h2>
+<p>Which problems have polynomial-time algorithms?</p>
+<p>In complexity theory, we study <em>classes</em> of problems (not algorithms themselves). We study <strong>decision problems</strong> (those with a yes or no) rather than optimisation problems. We will focus on concrete problems rather than abstract problems.</p>
+<p>Optimisation problems usually have closely related decision problems. If the optimisation problem is “easy”, the decision problem is also “easy”. If the optimisation problem is “hard”, the decision problem is also “hard”.</p>
+<h3 id="example">Example</h3>
+<p>A shortest path problem is an optimisation problem. We can can convert “find the shortest path from <span class="math inline">u</span> to <span class="math inline">v</span>” to “is there a path from <span class="math inline">u</span> to <span class="math inline">v</span> with at most <span class="math inline">k</span> edges”?</p>
+<p>If we can solve the optimisation problem, we can just take the length of the path and return 1 or 0 depending on whether the path’s length exceeds <span class="math inline">k</span>. Shortest path optimisation is solvable in polynomial-time and so the shortest path decision problem is solvable in polynomial-time.</p>
+<h3 id="definitions">Definitions</h3>
+<p><strong>Definition.</strong> An <strong>abstract problem</strong> is a binary relation on a set <span class="math inline">I</span> of problem instances and a set <span class="math inline">S</span> of problem solutions. Note there may be multiple solutions for a given instance.</p>
+<p><strong>Definition.</strong> An <strong>abstract decision problem</strong> is a function from an instance set <span class="math inline">I</span> to the solution set <span class="math inline">\{0,1\}</span>. Any given instance has a unique 0 or 1 solution.</p>
+<h3 id="encodings">Encodings</h3>
+<p>We need to represent problem instances in a some way a computer can understand.</p>
+<p><strong>Definition.</strong> An <strong>encoding</strong> of a set <span class="math inline">S</span> of abstract objects is a mapping from <span class="math inline">S</span> to the set of binary strings <span class="math inline">\{0,1\}^*</span>. For example, we can encode a natural number in its binary representation. More complicated objects can be represented as a binary string of its components.</p>
+<p><strong>Definition.</strong> A <strong>concrete problem</strong> is a problem whose instance set is the set of binary strings <span class="math inline">\{0,1\}^*</span>.</p>
+<p><strong>Definition.</strong> An algorithm <strong>solves</strong> a concrete problem in time <span class="math inline">O(T(n))</span> if, given an instance <span class="math inline">i</span> of length <span class="math inline">n=|i|</span>, the algorithm can produce a solution in <span class="math inline">O(T(n))</span> time.</p>
+<p><strong>Definition.</strong> A concrete problem is <strong>polynomial-time solvable</strong> if there exists an algorithm to solve it in <span class="math inline">O(n^k)</span> time for some constant <span class="math inline">k</span>. Here, <span class="math inline">n</span> is the size of the input.</p>
+<p><strong>Definition.</strong> The <strong>complexity class <em>P</em></strong> is the set of <em>concrete decision problems</em> which are <em>polynomial-time solvable</em>.</p>
+<p>An abstract decision problem <span class="math inline">Q</span> maps an instance <span class="math inline">i</span> to 0 or 1: <span class="math inline">Q \in I \to \{0,1\}</span>. An encoding makes abstract problems concrete. Given <span class="math inline">e : I \to \{0,1\}^*</span>, we can map an abstract problem to a concrete problem with <span class="math display">
+e(Q) \in \{0,1\}* \to \{0,1\}.
+</span> And we can solve an abstract instance <span class="math inline">i</span> with <span class="math display">
+e(Q)(e(i)) = Q(i).
+</span> Some binary strings may not map to an instance. We just assume such invalid strings map to <span class="math inline">0</span>.</p>
+<p>Ideally, the complexity would be independent of encoding but this is not the case.</p>
+<p>As an example, suppose we take an integer <span class="math inline">k</span> as the sole input to an algorithm and it has running time <span class="math inline">\Theta(k)</span>. If we encode it as binary number, the size of the input is <span class="math inline">n=\lfloor \log k \rfloor + 1</span> and the complexity of the resulting algorithm is <span class="math inline">\Theta(k) = \Theta(2^n)</span>. If we instead use a unary representation, the size of the input is <span class="math inline">n=k</span> and the complexity is <span class="math inline">\Theta(n)</span>.</p>
+<p>In practice, we want to rule out expensive encodings like unary.</p>
+<p>We assume a <strong>standard encoding</strong> where the encoding of an integer is polynomially related to its binary encoding, the encoding of a finite set is polynomially related to its encoding as a list of its elements enclosed in braces and separated by commas (as binary bytes). The notation <span class="math inline">\langle G \rangle</span> is the standard encoding of <span class="math inline">G</span>.</p>
+<p><strong>Definition.</strong> A <strong>polynomial-time computable function</strong> is a function <span class="math inline">f : \{0,1\}^* \to \{0,1\}^*</span> if there exists a polynomial-time algorithm <span class="math inline">A</span> that given any <span class="math inline">x \in \{0,1\}^*</span> produces <span class="math inline">f(x)</span>.</p>
+<h3 id="reductions">Reductions</h3>
+<p><strong>Definition.</strong> A <strong>polynomial-time reduction <em>F</em></strong> is a polynomial-time algorithm which reduces an instance <span class="math inline">\alpha</span> of a problem <span class="math inline">A</span> to an instance <span class="math inline">\beta</span> of the problem <span class="math inline">B</span>. Then, if <span class="math inline">\beta=F(\alpha)</span> then <span class="math inline">A(\alpha)=B(\beta)</span> for all <span class="math inline">\alpha</span>. Therefore, if <span class="math inline">B</span> is easy, then <span class="math inline">A</span> is easy as well.</p>
+<p>We can use reductions to show how hard a problem is. Suppose we know that no polynomial-time algorithm algorithm exists to solve <span class="math inline">A</span> and we can reduce <span class="math inline">A</span> to <span class="math inline">B</span> in polynomial time. As a result of this, <span class="math inline">B</span> cannot have a polynomial time algorithm. If <span class="math inline">A</span> is hard, <span class="math inline">B</span> is hard as well.</p>
+<p>To determine if a problem <span class="math inline">A</span> is in <em>P</em>, we can come up with a polynomial-time algorithm for <span class="math inline">A</span> or reduce <span class="math inline">A</span> to <span class="math inline">B</span> in polynomial-time where <span class="math inline">B</span> is a polynomial-time solvable problem.</p>
+<h2 id="nondeterministic-polynomial-np">Nondeterministic polynomial (NP)</h2>
+<p><strong>Definition</strong>. The <strong>complexity class <em>NP</em></strong> is the set of concrete decision problems for which a solution can be verified in polynomial time. The naming comes because if you could somehow nondeterministically choose the correct solution, we would be able to solve it in polynomial-time.</p>
+<p>Problems which we can’t even verify a solution in polynomial time are unlikely to have a polynomial-time (efficient) algorithm to solve it.</p>
+<p><em>P</em> is trivially a subset of <em>NP</em>, because if we can solve a problem we can just compute and compare solutions. The question is this: are there some problems where a solution is quick to verify but <em>can’t</em> be implemented efficiently? Most people believe there are (so <span class="math inline">P \ne NP</span>), but we cannot prove it yet.</p>
+<p>This is the famous <strong>P = NP</strong> problem. There is a $1,000,000 prize if you can prove or disprove this statement.</p>
+<p>Many problems are in NP but we do not know whether they are in P.</p>
+<h3 id="travelling-salesman-problem">Travelling salesman problem</h3>
+<p>The TSP is to find the shortest (weighted) path which visits each vertex exactly once and returns where it starts. We will deal with the related decision problem which is “is there a tour of weight at most <span class="math inline">k</span>?”. A solution is a list of vertices in the order visited.</p>
+<p>This decision problem can be verified by checking <span class="math inline">S</span> contains every vertex, adjacent vertices are connected, and the sum of weights is at most <span class="math inline">k</span>. This can all be done in polynomial time.</p>
+<p>Therefore, <span class="math inline">\text{TSP} \in \textit{NP}</span>, but we do not know if this is in <span class="math inline">P</span>. This is despite TSP being of practical commercial importance and decades of research.</p>
+<h2 id="np-hard">NP-Hard</h2>
+<p><strong>Definition.</strong> A concrete decision problem <span class="math inline">B</span> is <strong>NP-hard</strong> if <em>every</em> problem <span class="math inline">\textit{A} \in \textit{NP}</span> is polynomial-time reducible to <span class="math inline">B</span>.</p>
+<p>Thus, if we can solve just one one NP-hard problem, then we can solve <em>all</em> NP problems in polynomial time and P = NP.</p>
+<h2 id="np-complete">NP-Complete</h2>
+<p><strong>Definition.</strong> A concrete decision problem <span class="math inline">B</span> is <strong>NP-complete</strong> if and only if it is <em>NP-hard</em> and it is in <em>NP</em>. These are the <em>hardest</em> problems in NP.</p>
+<p>Are there even any NP-complete problems? In fact, TSP is in NPC so every other problem in NP can be reduced to TSP in polynomial time.</p>
+<p>The fact that NPC is non-empty is towards proving P = NP, but it is unlikely that this is the case. If we can show that a problem is NPC, it is reasonable to stop looking for an efficient algorithm (otherwise we would’ve shown P = NP).</p>
+<h3 id="circuit-sat">Circuit-SAT</h3>
+<p>The first NPC problem proven via Cook’s theorem: “the circuit-SAT problem is NP-complete”.</p>
+<p>A circuit is a logical circuit of AND/OR gates, etc. Cook showed that <em>any</em> problem in NP can be reduced to circuit-SAT in polynomial-time. Thus, if we can solve circuit-SAT in polynomial-time, we can solve anything in NP in polynomial-time.</p>
+<p>The problem is does there exist an assignment of inputs which produces a 1 as output.</p>
+<figure>
+<img src="/assets/image-20201108131250998.png" alt="" /><figcaption>image-20201108131250998</figcaption>
+</figure>
+<p>The proof is difficult and it involves encoding problem instances as binary strings, but this is a very useful result.</p>
+<p>Proving that other problems are NPC is then easy. Let <span class="math inline">X</span> be an arbitrary problem. If circuit-SAT is polynomial-time reducible to <span class="math inline">X</span>, then <span class="math inline">X</span> is NP-hard.</p>
+<p>This is because if we can solve <span class="math inline">X</span> in polynomial-time, then we can solve circuit-SAT and hence any NP problem in polynomial-time.</p>
+<p>To show a problem is in NPC, we will also need to show <span class="math inline">X</span> is in NP.</p>
+<h3 id="reductions-1">Reductions</h3>
+<p>The graph below shows transitive polynomial-time reductions. Alternatively, read the arrow as “can be implemented using”. Therefore, circuit-SAT is no harder than SAT and so on, so since circuit-SAT is NP-hard, SAT is NP-hard.</p>
+<figure>
+<img src="/assets/image-20201108131719689.png" alt="" /><figcaption>image-20201108131719689</figcaption>
+</figure>
+<p>Reducing circuit-SAT to SAT is done by writing the output of each gate as an intermediate variable as below. This can be done in polynomial time by doing constant work per gate.</p>
+<p>Reducing SAT to 3-CNF-SAT is possible because every boolean formula can be polynomially reduced to 3-CNF.</p>
+<p>We can reduce 3-CNF-SAT to CLIQUE can be done by drawing a graph where the vertices are the literals (variables or their negation). An edge exists between vertices if those variables are <em>compatible</em>. If there exists a clique of size <span class="math inline">k</span>, then there exists an assignment of variables for 3-CNF with <span class="math inline">k</span> clauses.</p>
+<p>CLIQUE can be reduced to VERTEX-COVER since they are dual problems. If we take the complement graph (same vertices, opposite edges), then a cover is just the clique of the graph complement. A cover is a minimum set of vertices which touch every edge.</p>
+<p>VERTEX-COVER can be reduced to HAM-CYCLE but the graph is hideous.</p>
+<p>We can reduce HAM-CYCLE to TSP. Now, we don’t want just any path which visits all vertices but we want the least cost one. We can just add weights to each edge and solve TSP where <span class="math inline">k</span> is the one minus the number of edges. Similarly, we can assign an edge which exists a weight 0 and a non-existent edge weight 1, then look for a tour with weight 0.</p>
+<h2 id="overview">Overview</h2>
+<p>The classes of problems:</p>
+<ul>
+<li><em>P</em> is polynomial time solvable.</li>
+<li><em>NP</em> is polynomial time verifiable.</li>
+<li><em>NP-hard</em> if all problems in NP can be polynomial-time reducible to the NP-hard problem.</li>
+<li><em>NPC</em> is NP-hard and NP.</li>
+</ul>
+<p><span class="math display">
+\textit{P} \subseteq \textit{NP}, \quad \textit{NPC} \subseteq \textit{NP},\quad \textit{P}\overset?=\textit{NP}.
+</span></p>
+<p>If we can reduce an NP-hard problem to a problem X, then X must also be NP-hard.</p>
+<h2 id="approximations">Approximations</h2>
+<h3 id="approximate-tsp">Approximate TSP</h3>
+<p>If our TSP graph satisfies the <em>triangle quality</em>, for all <span class="math inline">u,v,w</span>, the cost of going directly between vertices is no more than an indirect path, <span class="math display">
+c(u,w) \le c(u,v) + c(v,w),
+</span> then we can approximate it using the minimum spanning tree. This will return a tour of no more than twice the cost of the optimal tour.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">def</span> approx_tsp_tour(G,c):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    r <span class="op">=</span> <span class="bu">next</span>(G.V)         <span class="co"># choose a random root vertex</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    T <span class="op">=</span> mst_prim(G, c, r) <span class="co"># run prim&#39;s algorithm to find MST</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    L <span class="op">=</span> preorder(T)       <span class="co"># preorder walk of T</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>    <span class="cf">return</span> L              <span class="co"># hamiltonian cycle which visits in order L</span></span></code></pre></div>
+<p>Firstly, if we weren’t worried about repeating vertices, we could just walk along the MST tree. This would be the minimum cost of joining all the vertices. To make it a tour, we visit the vertices in the order of a preorder traversal. Due to the triangle inequality, this gives us the bound on the approximation cost.</p>
+<figure>
+<img src="/assets/image-20201108160523208.png" alt="" /><figcaption>image-20201108160523208</figcaption>
+</figure>
+    <p><small>Generated at 11/8/2020, 8:22:04 AM.</small></p>
   </body>
 </html>

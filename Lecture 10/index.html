@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    
+    <title>Lecture 10</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+    <!--<link rel="stylesheet" href="https://unpkg.com/mvp.css">-->
+    <!--<link rel="stylesheet" href="https://latex.now.sh/style.css">-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+    <style>
+      .katex { font-size: 1.1em; }
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          color: #aaaaaa;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+      div.sourceCode {   }
+      @media screen {
+        pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+      code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+      code span.at { color: #7d9029; } /* Attribute */
+      code span.bn { color: #40a070; } /* BaseN */
+      code span.bu { } /* BuiltIn */
+      code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #4070a0; } /* Char */
+      code span.cn { color: #880000; } /* Constant */
+      code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+      code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+      code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+      code span.dt { color: #902000; } /* DataType */
+      code span.dv { color: #40a070; } /* DecVal */
+      code span.er { color: #ff0000; font-weight: bold; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #40a070; } /* Float */
+      code span.fu { color: #06287e; } /* Function */
+      code span.im { } /* Import */
+      code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+      code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+      code span.op { color: #666666; } /* Operator */
+      code span.ot { color: #007020; } /* Other */
+      code span.pp { color: #bc7a00; } /* Preprocessor */
+      code span.sc { color: #4070a0; } /* SpecialChar */
+      code span.ss { color: #bb6688; } /* SpecialString */
+      code span.st { color: #4070a0; } /* String */
+      code span.va { color: #19177c; } /* Variable */
+      code span.vs { color: #4070a0; } /* VerbatimString */
+      code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    </style>
+    <!--<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>-->
+    <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    var macros = [];
+    /*
+    const BATCH_SIZE = 100;
+    var i = 0;
+    while (i < mathElements.length) {
+      const start = i;
+      setTimeout(() => {
+        for (var j = 0; j < BATCH_SIZE; j++) {
+          const i = start + j;
+          if (i >= mathElements.length) break;
+
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }, 0);
+      i += BATCH_SIZE;
+    }
+    */
+    
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+      katex.render(texText.data, mathElements[i], {
+        displayMode: mathElements[i].classList.contains('display'),
+        throwOnError: false,
+        macros: macros,
+        fleqn: false
+      });
+    }}
+    
+    });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <h1>Lecture 10</h1>
+
+    <!--
+<header id="title-block-header">
+<h1 class="title">Lecture 10 — Randomised Algorithms</h1>
+<p class="author">Kenton Lam</p>
+<p class="date">2020-11-08</p>
+</header>
+-->
+
+
+<h1 id="lecture-10-randomised-algorithms">Lecture 10 — Randomised Algorithms</h1>
+<p>We will talk about probabilistic analysis and randomised algorithms, with a focus on quicksort.</p>
+<h2 id="average-case-analysis">Average case analysis</h2>
+<p>Although we focus on worst-case complexities, there are also best case and average cases. The average case is the sum of each possible running time weighted by its probability. <span class="math display">
+\begin{aligned}
+T_{\text{worst}}(n) &amp;= \max_{|x|=n}T(n) \\ 
+T_{\text{best}}(n) &amp;= \min_{|x|=n}T(n) \\ 
+T_{\text{average}}(n) &amp;= \sum_{|x|=n}T(x)P(x)\\ 
+\end{aligned}
+</span></p>
+<h3 id="hire-assistant">Hire assistant</h3>
+<p>Consider an algorithm which needs to hire candidates from a list and performs a hire when the current candidate is better than the current hire. In pseudocode,</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">def</span> hire_assistant(n):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    best <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>        interview(candidate[j]) <span class="co"># cost c_i</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>        <span class="cf">if</span> candidate[j] <span class="op">&gt;</span> best:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>            best <span class="op">=</span> j</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>            hire(candidate[j])  <span class="co"># cost c_h</span></span></code></pre></div>
+<p>Let <span class="math inline">n</span> be the total number of candidates and <span class="math inline">m</span> be the number of hires made. The actual cost is <span class="math inline">nc_i + mc_h</span> and the worst case is if we hire everyone so <span class="math inline">n=m</span> and the cost is <span class="math inline">n(c_i+c_h)</span>. What is the average case?</p>
+<p>We need to consider the probability of hiring the <span class="math inline">j</span>-th candidate. Assume the candidates are in random order and so any of the first <span class="math inline">j</span> candidates are equally likely to be the best. The probability the <span class="math inline">j</span>-th candidate is the best of the first <span class="math inline">j</span> candidates is <span class="math inline">1/j</span>.</p>
+<p>Thus, the average cost of hiring candidates is <span class="math display">
+c_h\sum_{j=1}^n \frac 1 j = c_h \ln n + O(1)
+</span> which is much better than the worst-case of <span class="math inline">n c_h</span>.</p>
+<h2 id="randomised-algorithms">Randomised algorithms</h2>
+<p>The algorithm above is a deterministic algorithm.</p>
+<p>A <strong>randomised algorithm</strong> is one where its behaviour is determined by both its inputs and some random number generator.</p>
+<ul>
+<li>For deterministic algorithms, we can calculate an average running time from the distribution of inputs.</li>
+<li>For non-deterministic (randomised) algorithms, we need to calculate the <em>expected</em> running time without being to make an assumption on the probability distribution of the inputs.</li>
+</ul>
+<h3 id="randomly-permuting-arrays">Randomly permuting arrays</h3>
+<p>How can we randomise the hire assistant algorithm? We want a uniform random permutation, so a <span class="math inline">1/n!</span> chance for each permutation of the <span class="math inline">n</span> elements in <span class="math inline">A</span>.</p>
+<p>A simple way to do this is the algorithm below.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">def</span> permute_by_sort(A):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>    n <span class="op">=</span> <span class="bu">len</span>(A)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    P <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> n</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>        P[i] <span class="op">=</span> randint(<span class="dv">1</span>, n<span class="op">**</span><span class="dv">3</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>    <span class="co"># sort A using P as the keys</span></span></code></pre></div>
+<p>This produces a unique random permutation, so long as the chosen keys are unique. The probability of keys being unique is <span class="math display">
+\frac {n^3}{n^3} \times \frac{n^3-1}{n^3} \times \frac{n^3 - 2}{n^3}\times \cdots \times \frac{n^3-n}{n^3} \ge \left( 1 - \frac 1 {n^2} \right)^n \ge 1 - \frac 1 n.
+</span> This is reasonably non-zero so is not good enough. In fact, this gets closer to <span class="math inline">1</span> as <span class="math inline">n</span> becomes large.</p>
+<p>Alternatively, we can permute it by randomising in-place.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">def</span> randomise_in_place(A):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    n <span class="op">=</span> <span class="bu">len</span>(A)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>        <span class="co"># randomly swap i with an element to the right</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>        swap(A[i], A[randint(i, n)]) </span></code></pre></div>
+<p>A <span class="math inline">k</span>-permutation of a set of <span class="math inline">n</span> elements is a sequence containing <span class="math inline">k</span> of the <span class="math inline">n</span> elements. The invariant at <span class="math inline">i</span> is that <span class="math inline">A[1..i]</span> contains any <span class="math inline">i</span>-permutation of <span class="math inline">A</span> with probability <span class="math inline">(n-i)!/n!</span>. Before the first element, <span class="math inline">A[1..0]</span> contains a <span class="math inline">0</span>-permutation with probability <span class="math inline">1</span> (trivially).</p>
+<p>Assume that the invariant holds at <span class="math inline">i-1</span>. We must show that the invariant holds at <span class="math inline">i</span>.</p>
+<figure>
+<img src="/assets/image-20201108170034381.png" alt="" /><figcaption>image-20201108170034381</figcaption>
+</figure>
+<p>At the termination of the algorithm, <span class="math inline">A[1..n]</span> will contain any <span class="math inline">n</span>-permutation with probability <span class="math display">
+\frac{(n-n)!}{n!}=\frac 1 {n!},
+</span> so each of the <span class="math inline">1/n!</span> possible permutations is equally likely.</p>
+<h2 id="quicksort">Quicksort</h2>
+<p>Quicksort is great because it’s “pretty fast” “most of the time”. It preprocesses the array into partitions based of less than or greater than some pivot value. In pseudocode:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">def</span> quicksort(A, p, r):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    <span class="cf">if</span> p <span class="op">&lt;</span> r:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>        q <span class="op">=</span> partition(A, p, r)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>        quicksort(A, p, q<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>        quicksort(A, q<span class="op">+</span><span class="dv">1</span>, r)</span></code></pre></div>
+<p>In contrast, mergesort postprocesses sorted subarrays into a larger sorted array.</p>
+<p>The algorithms are very similar but differ in how they work with the recursive calls.</p>
+<p>A visual representation of the partition algorithm is below.</p>
+<figure>
+<img src="/assets/image-20201108171447197.png" alt="" /><figcaption>image-20201108171447197</figcaption>
+</figure>
+<p>The performance of quicksort depends very much on the element chosen as the pivot. The best and average cases are <span class="math inline">\Theta(n \log n)</span> but the worst case is terrible at <span class="math inline">\Theta(n^2)</span>. With the partitioning scheme above, the worst case occurs if the array is already sorted or reverse sorted. This is actually where insertion sort has its best case.</p>
+<p>How can we do this average case analysis? Later on, how can we randomise it so we get expected time complexity of <span class="math inline">n \log n</span> always?</p>
+<p>There are some cases with different performance: <span class="math display">
+\begin{aligned}
+q=\left\lfloor\frac{p+q}2\right\rfloor &amp;\implies T(n) = 2T(n/2) + \Theta(n) &amp; \in \Theta(n \log n) \\ 
+q=p+\frac{r-p}c &amp;\implies T(n) = T(n/c) + T((c-1)n/c) + \Theta(n) &amp;\in \Theta(n \log n) \\ 
+q=p &amp;\implies T(n) = T(n-1) + T(0) + \Theta(n) &amp;\in \Theta(n^2)
+\end{aligned}
+</span> Interestingly, when there is a proportional split as in the second case, the running time is still (asymptotically) optimal.</p>
+<h3 id="analysis-of-quicksort">Analysis of quicksort</h3>
+<p>We assume that each permutation is equally likely. We need to consider the total number of comparisons done by partition over <em>all</em> recursive calls of quicksort. Label the elements of <span class="math inline">A</span> as <span class="math inline">z_1, \ldots, z_n</span> in sorted order. Let <span class="math inline">Z_{ij}</span> be the <span class="math inline">i</span>-th to <span class="math inline">j</span>-th elements in sorted order.</p>
+<p>Consider an array of <span class="math inline">1..10</span> in any order and assume the first pivot is 4. The array would be partitioned into <span class="math inline">\{1, 2, 3\}</span> and <span class="math inline">\{5, 6, 7, 8, 9, 10\}</span>. In the partitioning, we compare 4 to every other element. At this point, nothing in the left set will ever be compared to an element of the right set.</p>
+<p>For any elements <span class="math inline">z_i</span> and <span class="math inline">z_j</span>, once a pivot <span class="math inline">x</span> is chosen such that <span class="math inline">z_i &lt; x &lt; z_j</span>, then <span class="math inline">z_i</span> will never be compared to <span class="math inline">z_j</span> in the future.</p>
+<p>If <span class="math inline">z_i</span> is chosen as a pivot before an other element in <span class="math inline">Z_{ij}</span>, it will be compared to every other element in <span class="math inline">Z_{ij}</span>. Similarly for <span class="math inline">z_j</span>. This, <span class="math inline">z_i</span> and <span class="math inline">z_j</span> are compared if and only if the first element chosen as pivot from <span class="math inline">Z_{ij}</span> is either <span class="math inline">z_i</span> or <span class="math inline">z_j</span>. Any element in <span class="math inline">Z_{ij}</span> is equally likely and <span class="math inline">Z_{ij}</span> has <span class="math inline">j-i+1</span> equally likely elements.</p>
+<p>Each pair of elements is compared at most once because in partition, elements are compared with the pivot only at most once, and an element is only used as a pivot in at most one partition step. <span class="math display">
+\begin{aligned}
+P(z_i \text{ compared to }z_j)&amp;=P(z_i\text{ or }z_j \text{ is first pivot chosen from } Z_{ij}) \\ 
+&amp;= \frac {1}{j-i+1} + \frac {1}{j-i+1} \\ 
+&amp;= \frac {2}{j-i+1}
+\end{aligned}
+</span> Now, we just need to sum over all pairs of possible comparisons. Then, <span class="math display">
+\begin{aligned}
+\sum_{i=1}^{n-1}\sum_{j=i+1}^nP(z_i \text{ compared to }z_j)  
+&amp;= \sum_{i=1}^{n-1}\sum_{j=i+1}^n\frac 2 {j-i+1} \\ 
+&amp;= \sum_{i=1}^{n-1}\sum_{k=1}^{n-i}\frac 2 {k+1} \\ 
+&amp;&lt;  \sum_{i=1}^{n-1}\sum_{k=1}^{n}\frac 2 {k} \\ 
+&amp;\in \sum_{i=1}^{n-1}O(\log n) \in O(n \log n)
+\end{aligned}
+</span> This is assuming the inputs are evenly distributed, but this is not likely in practice. Usually, we will get given arrays which are almost sorted.</p>
+<p>We can randomise it which ensures that the input arrays are all evenly distributed by randomly permuting the array before sorting it. Random permuting can be done in <span class="math inline">\Theta(n)</span>. In fact, we don’t even need to permute the entire array. We can just randomly choose a pivot from a random location.</p>
+<p>Either method will give us <strong>expected running time</strong> of <span class="math inline">\Theta(n \log n)</span> and the worst case will be unlikely.</p>
+<h2 id="biased-random">Biased random</h2>
+<p>In random algorithms, we typically assume we have access to some fair coin via RNG. In practice, we may not have a fair coin. We might have a biased coin with probability <span class="math inline">p \ne 1/2</span>. If all we have is a biased coin, how can we implement a fair coin which returns 0 or 1 with equal probability?</p>
+<p>Suppose we flip the coin twice. The probability of both 0 is <span class="math inline">p^2</span>. The probability of 0 then 1 or 1 then 0 is <span class="math inline">p(1-p)</span> and the probability of both 1 is <span class="math inline">(1-p)^2</span>. Then, the probability that <span class="math inline">a=0</span> <em>given</em> <span class="math inline">a \ne b</span> is <span class="math inline">1/2</span>.</p>
+<p>We can continue until we get 0 and 1 or 1 and 0, returning an arbitrary one when they differ.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">def</span> random():</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>    a <span class="op">=</span> biased_random()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>    b <span class="op">=</span> biased_random()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>    <span class="cf">while</span> a <span class="op">==</span> b:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>        a <span class="op">=</span> biased_random()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>        b <span class="op">=</span> biased_random()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>    <span class="cf">return</span> a</span></code></pre></div>
+<p>The running time depends on <span class="math inline">p</span> and we have <em>almost certain</em> termination.</p>
+<p>Let <span class="math inline">\alpha=2p(1-p)</span> be the probability that <span class="math inline">a \ne b</span>. The probability of terminating after <span class="math inline">0</span> iterations is just <span class="math inline">\alpha</span>. After once, it is <span class="math inline">\alpha(1-\alpha)</span>. Continuing, the probability of terminating after exactly <span class="math inline">i</span> iterations is <span class="math display">
+(1-\alpha)^i\alpha.
+</span> The expected number of iterations is the sum of <span class="math inline">i</span> multiplied by the probability of each, <span class="math display">
+\begin{aligned}
+\sum_{i=0}^\infty i ((1-\alpha)^i\alpha) &amp;= \alpha \sum_{i=0}^\infty i (1-\alpha)^i \\ 
+&amp;= \frac \alpha{(1-(1-\alpha))^2} \\ 
+&amp;= \frac \alpha{\alpha^2} = \frac 1 \alpha
+\end{aligned}
+</span> This directly gives us the expected running time.</p>
+    <p><small>Generated at 11/8/2020, 8:22:04 AM.</small></p>
+  </body>
+</html>

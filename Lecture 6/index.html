@@ -244,6 +244,6 @@ N(n) \ge N(1) \times N(n-1) + N(n-1)\times N(1) = 2N(n-1)\in \Omega(2^n).
 C_{ij} = \min \{\ C_{i,i+k} + C_{i+k+1,j} + p_{i-1}p_{k+1}p_{j} : k \in 1, \ldots, j-i+1\ \}.
 </span> This can be made slightly nicer by using <span class="math inline">i \le k &lt; j</span>. This is incredibly inefficient to compute directly (even worse than our lower bound above), but is the intuition we need.</p>
 <p>A key insight here is that <span class="math inline">C_{ij}</span> depends on <span class="math inline">C_{ij}</span> and <span class="math inline">C_{k+1,j}</span>. We can draw a matrix of <span class="math inline">C</span> and fill it <em>bottom-up</em> starting with the diagonals, corresponding to <span class="math inline">C_{ii}=0</span>.</p>
-    <p><small>Generated at 11/7/2020, 12:24:41 PM.</small></p>
+    <p><small>Generated at 11/8/2020, 8:22:04 AM.</small></p>
   </body>
 </html>

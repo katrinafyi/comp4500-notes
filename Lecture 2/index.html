@@ -208,7 +208,7 @@ T(n) = T(\lfloor n/2 \rfloor) + T(\lceil n/2 \rceil) + 1
 &amp;\le c(\lfloor n/2 \rfloor) + c(\lceil n/2 \rceil) + 1  \\ 
 &amp;=cn+1 
 \end{aligned}
-</span> which is not <span class="math inline">\le cn</span>, so we cannot prove it this way! We can solve this problem by <em>strenghtening the guess</em>, via subtracting a lower order term. Specifically, we assume that <span class="math inline">T(n) \le cn-b</span> for <span class="math inline">b&gt;0</span>. This does not affect the asymptotic bound but with this stronger assumption, we are able to probe a stronger result.</p>
+</span> which is not <span class="math inline">\le cn</span>, so we cannot prove it this way! We can solve this problem by strengthening the guess_, via subtracting a lower order term. Specifically, we assume that <span class="math inline">T(n) \le cn-b</span> for <span class="math inline">b&gt;0</span>. This does not affect the asymptotic bound but with this stronger assumption, we are able to probe a stronger result.</p>
 <p><strong>Note:</strong> In the inductive step, we need to be very precise. We need to prove that <span class="math inline">T(n) \le cn</span> very carefully, something like <span class="math inline">cn + n = O(n)</span> is not good enough.</p>
 <h4 id="change-of-variables">Change of variables</h4>
 <p>Consider <span class="math display">
@@ -252,6 +252,6 @@ f(n) / g(n) \in \Omega(n^\epsilon).
 </ol></li>
 </ul>
 <p><strong>Example:</strong> Consider merge sort from earlier with <span class="math inline">T(n) = 2 T(n/2) + f(n)</span> with <span class="math inline">f(n) \in \Theta(n)</span>. We compare <span class="math inline">f(n)</span> to <span class="math inline">n^{\log_22}=n</span> and we see they are asymptotically the same. As a result, this is case 2 and <span class="math inline">T(n) \in \Omega(n \lg n)</span>.</p>
-    <p><small>Generated at 11/7/2020, 12:24:41 PM.</small></p>
+    <p><small>Generated at 11/8/2020, 8:22:04 AM.</small></p>
   </body>
 </html>

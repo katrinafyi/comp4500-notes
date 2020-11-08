@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    
+    <title>Lecture 9</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+    <!--<link rel="stylesheet" href="https://unpkg.com/mvp.css">-->
+    <!--<link rel="stylesheet" href="https://latex.now.sh/style.css">-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+    <style>
+      .katex { font-size: 1.1em; }
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          color: #aaaaaa;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+      div.sourceCode {   }
+      @media screen {
+        pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+      code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+      code span.at { color: #7d9029; } /* Attribute */
+      code span.bn { color: #40a070; } /* BaseN */
+      code span.bu { } /* BuiltIn */
+      code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #4070a0; } /* Char */
+      code span.cn { color: #880000; } /* Constant */
+      code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+      code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+      code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+      code span.dt { color: #902000; } /* DataType */
+      code span.dv { color: #40a070; } /* DecVal */
+      code span.er { color: #ff0000; font-weight: bold; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #40a070; } /* Float */
+      code span.fu { color: #06287e; } /* Function */
+      code span.im { } /* Import */
+      code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+      code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+      code span.op { color: #666666; } /* Operator */
+      code span.ot { color: #007020; } /* Other */
+      code span.pp { color: #bc7a00; } /* Preprocessor */
+      code span.sc { color: #4070a0; } /* SpecialChar */
+      code span.ss { color: #bb6688; } /* SpecialString */
+      code span.st { color: #4070a0; } /* String */
+      code span.va { color: #19177c; } /* Variable */
+      code span.vs { color: #4070a0; } /* VerbatimString */
+      code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    </style>
+    <!--<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>-->
+    <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    var macros = [];
+    /*
+    const BATCH_SIZE = 100;
+    var i = 0;
+    while (i < mathElements.length) {
+      const start = i;
+      setTimeout(() => {
+        for (var j = 0; j < BATCH_SIZE; j++) {
+          const i = start + j;
+          if (i >= mathElements.length) break;
+
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }, 0);
+      i += BATCH_SIZE;
+    }
+    */
+    
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+      katex.render(texText.data, mathElements[i], {
+        displayMode: mathElements[i].classList.contains('display'),
+        throwOnError: false,
+        macros: macros,
+        fleqn: false
+      });
+    }}
+    
+    });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <h1>Lecture 9</h1>
+
+    <!--
+<header id="title-block-header">
+<h1 class="title">Lecture 9 — Computational Complexity</h1>
+<p class="author">Kenton Lam</p>
+<p class="date">2020-11-08</p>
+</header>
+-->
+
+
+<h1 id="lecture-9-computational-complexity">Lecture 9 — Computational Complexity</h1>
+<h2 id="polynomial-time">Polynomial time</h2>
+<p>We call polynomial time algorithms <strong>tractable</strong>. In practice, large polynomial algorithms are not tractable. However, if an algorithm has a polynomial-time solution, there is usually an <em>efficient</em> polynomial-time solution.</p>
+<p>For example, matrix multiplication has been improved from <span class="math inline">\Theta(N^3)</span> to something less.</p>
+<p>The class of problems solvable in polynomial time on a serial random-access machine (which we have been using) is the same as</p>
+<ul>
+<li>the polynomial-time problems on an abstract Turing machine, and</li>
+<li>the polynomial-time problems on a parallel computer when number of processors grows polynomially with input size.</li>
+</ul>
+<p>So the computational model we use to execute our algorithm is largely irrelevant for the analysis.</p>
+<p>Polynomials are <strong>closed</strong> under addition, multiplication, and composition. Thus, if the output of a polynomial-time algorithm is used as input for another polynomial-time algorithm, the resultant algorithm is also polynomial-time.</p>
+<h2 id="examples">Examples</h2>
+<p>Which problems have polynomial-time algorithms? Problems which look similar (in nature) may not be.</p>
+<p>We can find shortest paths from a single source in a directed graph in <span class="math inline">O(VE)</span> time, however the <em>longest</em> simple path between two vertices is difficult. Even determining if a simple path exists with at least a given number of vertices is difficult (NP-complete).</p>
+<p>An Euler tour in a connected directed graph is a cycle in which each edge of the graph is traversed exactly once. Finding an Euler tour can be done in <span class="math inline">O(E)</span> time. A Hamiltonian cycle in a graph is a simple cycle which contains all vertices in a graph. Determining <em>whether</em> a graph has a Hamiltonian cycle is NP-complete.</p>
+<h3 id="cnf-vs-3-cnf-satisfiability">2-CNF vs 3-CNF satisfiability</h3>
+<p>A boolean formula like <span class="math display">
+(x_1 \vee \neg x_2) \wedge (\neg x_1 \vee x_3) \wedge (\neg x_2 \vee \neg x_3)
+</span> may have a satisfying assignment of <span class="math inline">x_1, x_2, x_3</span> such that it evaluates to 1. The formula above does, e.g. 1 0 1.</p>
+<p>A boolean formula is in conjunctive normal form (CNF) if it is a conjunction (and) of clauses, each of which is a disjunction )or) of literals, where a literal is a variable or a negation. Any boolean formula can be converted to CNF.</p>
+<p>A <span class="math inline">k</span>-CNF formula is one where each disjunction (or) has exactly <span class="math inline">k</span> literals. The example above is 2-CNF. Determining whether a 3-CNF is satisfiable is NP-complete.</p>
+<h2 id="background">Background</h2>
+<p>Which problems have polynomial-time algorithms?</p>
+<p>In complexity theory, we study <em>classes</em> of problems (not algorithms themselves). We study <strong>decision problems</strong> (those with a yes or no) rather than optimisation problems. We will focus on concrete problems rather than abstract problems.</p>
+<p>Optimisation problems usually have closely related decision problems. If the optimisation problem is “easy”, the decision problem is also “easy”. If the optimisation problem is “hard”, the decision problem is also “hard”.</p>
+<h3 id="example">Example</h3>
+<p>A shortest path problem is an optimisation problem. We can can convert “find the shortest path from <span class="math inline">u</span> to <span class="math inline">v</span>” to “is there a path from <span class="math inline">u</span> to <span class="math inline">v</span> with at most <span class="math inline">k</span> edges”?</p>
+<p>If we can solve the optimisation problem, we can just take the length of the path and return 1 or 0 depending on whether the path’s length exceeds <span class="math inline">k</span>. Shortest path optimisation is solvable in polynomial-time and so the shortest path decision problem is solvable in polynomial-time.</p>
+<h3 id="definitions">Definitions</h3>
+<p><strong>Definition.</strong> An <strong>abstract problem</strong> is a binary relation on a set <span class="math inline">I</span> of problem instances and a set <span class="math inline">S</span> of problem solutions. Note there may be multiple solutions for a given instance.</p>
+<p><strong>Definition.</strong> An <strong>abstract decision problem</strong> is a function from an instance set <span class="math inline">I</span> to the solution set <span class="math inline">\{0,1\}</span>. Any given instance has a unique 0 or 1 solution.</p>
+<h3 id="encodings">Encodings</h3>
+<p>We need to represent problem instances in a some way a computer can understand.</p>
+<p><strong>Definition.</strong> An <strong>encoding</strong> of a set <span class="math inline">S</span> of abstract objects is a mapping from <span class="math inline">S</span> to the set of binary strings <span class="math inline">\{0,1\}^*</span>. For example, we can encode a natural number in its binary representation. More complicated objects can be represented as a binary string of its components.</p>
+<p><strong>Definition.</strong> A <strong>concrete problem</strong> is a problem whose instance set is the set of binary strings <span class="math inline">\{0,1\}^*</span>.</p>
+<p><strong>Definition.</strong> An algorithm <strong>solves</strong> a concrete problem in time <span class="math inline">O(T(n))</span> if, given an instance <span class="math inline">i</span> of length <span class="math inline">n=|i|</span>, the algorithm can produce a solution in <span class="math inline">O(T(n))</span> time.</p>
+<p><strong>Definition.</strong> A concrete problem is <strong>polynomial-time solvable</strong> if there exists an algorithm to solve it in <span class="math inline">O(n^k)</span> time for some constant <span class="math inline">k</span>. Here, <span class="math inline">n</span> is the size of the input.</p>
+<p><strong>Definition.</strong> The <strong>complexity class <em>P</em></strong> is the set of <em>concrete decision problems</em> which are <em>polynomial-time solvable</em>.</p>
+<p>An abstract decision problem <span class="math inline">Q</span> maps an instance <span class="math inline">i</span> to 0 or 1: <span class="math inline">Q \in I \to \{0,1\}</span>. An encoding makes abstract problems concrete. Given <span class="math inline">e : I \to \{0,1\}^*</span>, we can map an abstract problem to a concrete problem with <span class="math display">
+e(Q) \in \{0,1\}* \to \{0,1\}.
+</span> And we can solve an abstract instance <span class="math inline">i</span> with <span class="math display">
+e(Q)(e(i)) = Q(i).
+</span> Some binary strings may not map to an instance. We just assume such invalid strings map to <span class="math inline">0</span>.</p>
+<p>Ideally, the complexity would be independent of encoding but this is not the case.</p>
+<p>As an example, suppose we take an integer <span class="math inline">k</span> as the sole input to an algorithm and it has running time <span class="math inline">\Theta(k)</span>. If we encode it as binary number, the size of the input is <span class="math inline">n=\lfloor \log k \rfloor + 1</span> and the complexity of the resulting algorithm is <span class="math inline">\Theta(k) = \Theta(2^n)</span>. If we instead use a unary representation, the size of the input is <span class="math inline">n=k</span> and the complexity is <span class="math inline">\Theta(n)</span>.</p>
+<p>In practice, we want to rule out expensive encodings like unary.</p>
+<p>We assume a <strong>standard encoding</strong> where the encoding of an integer is polynomially related to its binary encoding, the encoding of a finite set is polynomially related to its encoding as a list of its elements enclosed in braces and separated by commas (as binary bytes). The notation <span class="math inline">\langle G \rangle</span> is the standard encoding of <span class="math inline">G</span>.</p>
+<p><strong>Definition.</strong> A <strong>polynomial-time computable function</strong> is a function <span class="math inline">f : \{0,1\}^* \to \{0,1\}^*</span> if there exists a polynomial-time algorithm <span class="math inline">A</span> that given any <span class="math inline">x \in \{0,1\}^*</span> produces <span class="math inline">f(x)</span>.</p>
+<h3 id="reductions">Reductions</h3>
+<p><strong>Definition.</strong> A <strong>polynomial-time reduction <em>F</em></strong> is a polynomial-time algorithm which reduces an instance <span class="math inline">\alpha</span> of a problem <span class="math inline">A</span> to an instance <span class="math inline">\beta</span> of the problem <span class="math inline">B</span>. Then, if <span class="math inline">\beta=F(\alpha)</span> then <span class="math inline">A(\alpha)=B(\beta)</span> for all <span class="math inline">\alpha</span>. Therefore, if <span class="math inline">B</span> is easy, then <span class="math inline">A</span> is easy as well.</p>
+<p>We can use reductions to show how hard a problem is. Suppose we know that no polynomial-time algorithm algorithm exists to solve <span class="math inline">A</span> and we can reduce <span class="math inline">A</span> to <span class="math inline">B</span> in polynomial time. As a result of this, <span class="math inline">B</span> cannot have a polynomial time algorithm. If <span class="math inline">A</span> is hard, <span class="math inline">B</span> is hard as well.</p>
+<p>To determine if a problem <span class="math inline">A</span> is in <em>P</em>, we can come up with a polynomial-time algorithm for <span class="math inline">A</span> or reduce <span class="math inline">A</span> to <span class="math inline">B</span> in polynomial-time where <span class="math inline">B</span> is a polynomial-time solvable problem.</p>
+<h2 id="nondeterministic-polynomial-np">Nondeterministic polynomial (NP)</h2>
+<p><strong>Definition</strong>. The <strong>complexity class <em>NP</em></strong> is the set of concrete decision problems for which a solution can be verified in polynomial time. The naming comes because if you could somehow nondeterministically choose the correct solution, we would be able to solve it in polynomial-time.</p>
+<p>Problems which we can’t even verify a solution in polynomial time are unlikely to have a polynomial-time (efficient) algorithm to solve it.</p>
+<p><em>P</em> is trivially a subset of <em>NP</em>, because if we can solve a problem we can just compute and compare solutions. The question is this: are there some problems where a solution is quick to verify but <em>can’t</em> be implemented efficiently? Most people believe there are (so <span class="math inline">P \ne NP</span>), but we cannot prove it yet.</p>
+<p>This is the famous <strong>P = NP</strong> problem. There is a $1,000,000 prize if you can prove or disprove this statement.</p>
+<p>Many problems are in NP but we do not know whether they are in P.</p>
+<h3 id="travelling-salesman-problem">Travelling salesman problem</h3>
+<p>The TSP is to find the shortest (weighted) path which visits each vertex exactly once and returns where it starts. We will deal with the related decision problem which is “is there a tour of weight at most <span class="math inline">k</span>?”. A solution is a list of vertices in the order visited.</p>
+<p>This decision problem can be verified by checking <span class="math inline">S</span> contains every vertex, adjacent vertices are connected, and the sum of weights is at most <span class="math inline">k</span>. This can all be done in polynomial time.</p>
+<p>Therefore, <span class="math inline">\text{TSP} \in \textit{NP}</span>, but we do not know if this is in <span class="math inline">P</span>. This is despite TSP being of practical commercial importance and decades of research.</p>
+<h2 id="np-hard">NP-Hard</h2>
+<p><strong>Definition.</strong> A concrete decision problem <span class="math inline">B</span> is <strong>NP-hard</strong> if <em>every</em> problem <span class="math inline">\textit{A} \in \textit{NP}</span> is polynomial-time reducible to <span class="math inline">B</span>.</p>
+<p>Thus, if we can solve just one one NP-hard problem, then we can solve <em>all</em> NP problems in polynomial time and P = NP.</p>
+<h2 id="np-complete">NP-Complete</h2>
+<p><strong>Definition.</strong> A concrete decision problem <span class="math inline">B</span> is <strong>NP-complete</strong> if and only if it is <em>NP-hard</em> and it is in <em>NP</em>. These are the <em>hardest</em> problems in NP.</p>
+<p>Are there even any NP-complete problems? In fact, TSP is in NPC so every other problem in NP can be reduced to TSP in polynomial time.</p>
+<p>The fact that NPC is non-empty is towards proving P = NP, but it is unlikely that this is the case. If we can show that a problem is NPC, it is reasonable to stop looking for an efficient algorithm (otherwise we would’ve shown P = NP).</p>
+<h3 id="circuit-sat">Circuit-SAT</h3>
+<p>The first NPC problem proven via Cook’s theorem: “the circuit-SAT problem is NP-complete”.</p>
+<p>A circuit is a logical circuit of AND/OR gates, etc. Cook showed that <em>any</em> problem in NP can be reduced to circuit-SAT in polynomial-time. Thus, if we can solve circuit-SAT in polynomial-time, we can solve anything in NP in polynomial-time.</p>
+<p>The problem is does there exist an assignment of inputs which produces a 1 as output.</p>
+<figure>
+<img src="/assets/image-20201108131250998.png" alt="" /><figcaption>image-20201108131250998</figcaption>
+</figure>
+<p>The proof is difficult and it involves encoding problem instances as binary strings, but this is a very useful result.</p>
+<p>Proving that other problems are NPC is then easy. Let <span class="math inline">X</span> be an arbitrary problem. If circuit-SAT is polynomial-time reducible to <span class="math inline">X</span>, then <span class="math inline">X</span> is NP-hard.</p>
+<p>This is because if we can solve <span class="math inline">X</span> in polynomial-time, then we can solve circuit-SAT and hence any NP problem in polynomial-time.</p>
+<p>To show a problem is in NPC, we will also need to show <span class="math inline">X</span> is in NP.</p>
+<h3 id="reductions-1">Reductions</h3>
+<p>The graph below shows transitive polynomial-time reductions. Alternatively, read the arrow as “can be implemented using”. Therefore, circuit-SAT is no harder than SAT and so on, so since circuit-SAT is NP-hard, SAT is NP-hard.</p>
+<figure>
+<img src="/assets/image-20201108131719689.png" alt="" /><figcaption>image-20201108131719689</figcaption>
+</figure>
+<p>Reducing circuit-SAT to SAT is done by writing the output of each gate as an intermediate variable as below. This can be done in polynomial time by doing constant work per gate.</p>
+<p>Reducing SAT to 3-CNF-SAT is possible because every boolean formula can be polynomially reduced to 3-CNF.</p>
+<p>We can reduce 3-CNF-SAT to CLIQUE can be done by drawing a graph where the vertices are the literals (variables or their negation). An edge exists between vertices if those variables are <em>compatible</em>. If there exists a clique of size <span class="math inline">k</span>, then there exists an assignment of variables for 3-CNF with <span class="math inline">k</span> clauses.</p>
+<p>CLIQUE can be reduced to VERTEX-COVER since they are dual problems. If we take the complement graph (same vertices, opposite edges), then a cover is just the clique of the graph complement. A cover is a minimum set of vertices which touch every edge.</p>
+<p>VERTEX-COVER can be reduced to HAM-CYCLE but the graph is hideous.</p>
+<p>We can reduce HAM-CYCLE to TSP. Now, we don’t want just any path which visits all vertices but we want the least cost one. We can just add weights to each edge and solve TSP where <span class="math inline">k</span> is the one minus the number of edges. Similarly, we can assign an edge which exists a weight 0 and a non-existent edge weight 1, then look for a tour with weight 0.</p>
+<h2 id="overview">Overview</h2>
+<p>The classes of problems:</p>
+<ul>
+<li><em>P</em> is polynomial time solvable.</li>
+<li><em>NP</em> is polynomial time verifiable.</li>
+<li><em>NP-hard</em> if all problems in NP can be polynomial-time reducible to the NP-hard problem.</li>
+<li><em>NPC</em> is NP-hard and NP.</li>
+</ul>
+<p><span class="math display">
+\textit{P} \subseteq \textit{NP}, \quad \textit{NPC} \subseteq \textit{NP},\quad \textit{P}\overset?=\textit{NP}.
+</span></p>
+<p>If we can reduce an NP-hard problem to a problem X, then X must also be NP-hard.</p>
+<h2 id="approximations">Approximations</h2>
+<h3 id="approximate-tsp">Approximate TSP</h3>
+<p>If our TSP graph satisfies the <em>triangle quality</em>, for all <span class="math inline">u,v,w</span>, the cost of going directly between vertices is no more than an indirect path, <span class="math display">
+c(u,w) \le c(u,v) + c(v,w),
+</span> then we can approximate it using the minimum spanning tree. This will return a tour of no more than twice the cost of the optimal tour.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">def</span> approx_tsp_tour(G,c):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    r <span class="op">=</span> <span class="bu">next</span>(G.V)         <span class="co"># choose a random root vertex</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    T <span class="op">=</span> mst_prim(G, c, r) <span class="co"># run prim&#39;s algorithm to find MST</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    L <span class="op">=</span> preorder(T)       <span class="co"># preorder walk of T</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>    <span class="cf">return</span> L              <span class="co"># hamiltonian cycle which visits in order L</span></span></code></pre></div>
+<p>Firstly, if we weren’t worried about repeating vertices, we could just walk along the MST tree. This would be the minimum cost of joining all the vertices. To make it a tour, we visit the vertices in the order of a preorder traversal. Due to the triangle inequality, this gives us the bound on the approximation cost.</p>
+<figure>
+<img src="/assets/image-20201108160523208.png" alt="" /><figcaption>image-20201108160523208</figcaption>
+</figure>
+    <p><small>Generated at 11/8/2020, 8:22:04 AM.</small></p>
+  </body>
+</html>

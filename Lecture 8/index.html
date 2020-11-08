@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    
+    <title>Lecture 8</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+    <!--<link rel="stylesheet" href="https://unpkg.com/mvp.css">-->
+    <!--<link rel="stylesheet" href="https://latex.now.sh/style.css">-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+    <style>
+      .katex { font-size: 1.1em; }
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          color: #aaaaaa;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+      div.sourceCode {   }
+      @media screen {
+        pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+      code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+      code span.at { color: #7d9029; } /* Attribute */
+      code span.bn { color: #40a070; } /* BaseN */
+      code span.bu { } /* BuiltIn */
+      code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #4070a0; } /* Char */
+      code span.cn { color: #880000; } /* Constant */
+      code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+      code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+      code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+      code span.dt { color: #902000; } /* DataType */
+      code span.dv { color: #40a070; } /* DecVal */
+      code span.er { color: #ff0000; font-weight: bold; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #40a070; } /* Float */
+      code span.fu { color: #06287e; } /* Function */
+      code span.im { } /* Import */
+      code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+      code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+      code span.op { color: #666666; } /* Operator */
+      code span.ot { color: #007020; } /* Other */
+      code span.pp { color: #bc7a00; } /* Preprocessor */
+      code span.sc { color: #4070a0; } /* SpecialChar */
+      code span.ss { color: #bb6688; } /* SpecialString */
+      code span.st { color: #4070a0; } /* String */
+      code span.va { color: #19177c; } /* Variable */
+      code span.vs { color: #4070a0; } /* VerbatimString */
+      code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    </style>
+    <!--<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>-->
+    <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    var macros = [];
+    /*
+    const BATCH_SIZE = 100;
+    var i = 0;
+    while (i < mathElements.length) {
+      const start = i;
+      setTimeout(() => {
+        for (var j = 0; j < BATCH_SIZE; j++) {
+          const i = start + j;
+          if (i >= mathElements.length) break;
+
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }, 0);
+      i += BATCH_SIZE;
+    }
+    */
+    
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+      katex.render(texText.data, mathElements[i], {
+        displayMode: mathElements[i].classList.contains('display'),
+        throwOnError: false,
+        macros: macros,
+        fleqn: false
+      });
+    }}
+    
+    });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <h1>Lecture 8</h1>
+
+    <!--
+<header id="title-block-header">
+<h1 class="title">Lecture 8 — Amortised Analysis</h1>
+<p class="author">Kenton Lam</p>
+<p class="date">2020-11-07</p>
+</header>
+-->
+
+
+<h1 id="lecture-8-amortised-analysis">Lecture 8 — Amortised Analysis</h1>
+<h2 id="amortised-analysis">Amortised analysis</h2>
+<p>We’ve analysed algorithms “one-off”. However, we often use data structures and call their methods many times. Using different data structures can impact the running time of the algorithm.</p>
+<p>Amortised analysis is essentially looking at the average complexity or time used for a <em>series</em> of operations. It has origins from financial contexts, for example a mortgage’s cost is split across a much longer time period.</p>
+<p>Using naive analysis of a sequence of operations might assume the worst case all the time. In practice, the worst case may be very rare. Amortised analysis considers sequences of operations, typically those modifying a data structure.</p>
+<p>Some examples include Java’s ArrayList, ArrayDeque, and C++’s vector which have operations running in <em>amortised constant time</em>.</p>
+<h3 id="dynamic-table">Dynamic table</h3>
+<p>The most simple example is a dynamic table, which is capable of storing an unknown number of items by doubling its capacity when it is full. Typically, inserting is constant-time but sometimes a reallocation and copy is needed.</p>
+<p>The best-case is <span class="math inline">\Theta(1)</span> and worst-case is <span class="math inline">\Theta(n)</span> if resizing is necessary. To insert <span class="math inline">n</span> elements, the worst case would be <span class="math inline">\Theta(n^2)</span>? However, it is clear the <em>most</em> of the operations would be <span class="math inline">\Theta(1)</span>.</p>
+<p>Formally, we are analysing</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    insert(e[i])</span></code></pre></div>
+<p>for some sequence of items <span class="math inline">e</span>. The vast majority of the operations are constant-time, but how many are not? This will depend on <span class="math inline">i</span>.</p>
+<p>As a more precise analysis, we can let <span class="math inline">c_i</span> be the cost of the <span class="math inline">i</span>-th insertion which will be 1 most of the time but <span class="math inline">i</span> if <span class="math inline">i-1</span> was an exact power of 2.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">i</span></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>size</td>
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">c_i</span></td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>This is the <strong>aggregate method</strong> for amortised analysis. The cost of <span class="math inline">n</span> insertions is <span class="math display">
+\begin{aligned}
+\sum_{i=1}^n c_i \le n + \sum_{j=1}^{\lceil \lg n \rceil}2^{j-1} \le 3n = \Theta(n)
+\end{aligned}
+</span> The average cost of each insert operation is <span class="math inline">\Theta(n) / n = \Theta(1)</span>. What if we start mixing insert and delete operations? In that case, we can no longer use this summation because the cost will be different depending on the order of inserts and deletes.</p>
+<h2 id="stack">Stack</h2>
+<p>Consider a stack with two operations: push and pop. Suppose we add a multipop operation:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">def</span> multipop(S, k):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>    <span class="cf">while</span> S <span class="kw">and</span> k <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>        pop(S)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>        k <span class="op">=</span> k <span class="op">-</span> <span class="dv">1</span></span></code></pre></div>
+<p>The multipop operation can be <span class="math inline">O(n)</span> if <span class="math inline">n=k</span>. Clearly, any sequence of <span class="math inline">n</span> stack operations must be <span class="math inline">O(n^2)</span>. However, we can get a better bound.</p>
+<p>We can use some details here:</p>
+<ul>
+<li>multipop only iterates while the stack is not empty, and</li>
+<li>each element is pushed and popped exactly once.</li>
+</ul>
+<p>We are interested in analysing a sequence of <span class="math inline">n</span> mixed operations:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    push(...) <span class="kw">or</span> pop(...) <span class="kw">or</span> multipop(...)</span></code></pre></div>
+<p>Two methods we could use here are:</p>
+<ul>
+<li>the accounting method, which focuses on the operations, or</li>
+<li>the potential method, which focuses on the data structure.</li>
+</ul>
+<h3 id="accounting-method">Accounting method</h3>
+<p>Consider the actual cost <span class="math inline">c_i</span> of each operation. This is 1 for push/pop and <span class="math inline">\min(\operatorname*{size}(S), k)</span> for multipop. We can assign an <em>amortised cost</em> <span class="math inline">\hat c_i</span> for each method as 2 for push and 0 for the others. Here, we add the cost of the eventual pop upfront in the push method, using the rule that an item is pushed then popped exactly once. Then, the cost of the pop is already “paid” in the pop so “cost” nothing.</p>
+<p>For any sequence of operations, the amortised cost must be an upper bound on the actual cost. We can use this in place of the complicated actual cost and say that a sequence of <span class="math inline">n</span> operations has amortised time <span class="math inline">O(n)</span>.</p>
+<p>To prove this, we must show that running total of the amortised costs is greater than or running total of the sum of the actual costs. That is, for all sequences and <span class="math inline">n</span>, <span class="math display">
+\sum_{i=1}^n \hat c_i \ge \sum_{i=1}^n c_i
+</span> Intuitively, the extra “credit” in the push pays for any later (multi)pop.</p>
+<h3 id="potential-method">Potential method</h3>
+<p>This is a third method we can use. It finds a <strong>potential function</strong> on the data structure. The amortised cost is the actual cost plus change in potential. We write this as <span class="math display">
+\hat c_i = c_i + \Phi(D_i) - \Phi(D_{i-1}).
+</span> As before, the amortised cost must be an upper bound on the actual cost. Thus, <span class="math display">
+\sum_{i=1}^n \hat c_i = \sum_{i=1}^n (c_i + \Phi(D_i)-\Phi(D_{i-1})) = \sum_{i=1}^n c_i + \Phi(D_n) - \Phi(D_0).
+</span> We need to show that <span class="math inline">\Phi(D_i) \ge \Phi(D_0)</span> for all <span class="math inline">i</span>. This can be trivially satisfied if <span class="math inline">\Phi(D_0)=0</span> and <span class="math inline">\Phi(D_i) \ge 0</span>.</p>
+<p>Returning to our stack, the actual costs are <span class="math inline">1</span>, <span class="math inline">1</span>, and <span class="math inline">k&#39;</span>. Define <span class="math inline">\Phi(S)</span> as the number of elements in the stack and the change in potential is <span class="math inline">1</span> for push, <span class="math inline">-1</span> for pop, and <span class="math inline">-k&#39;</span> for multipop.</p>
+<p>The amortised cost is the actual cost added to the change in potential, giving us push is 2, pop is 0, and multipop is 0. Of course, <span class="math inline">\Phi(D_0)=0</span> because the stack starts out empty so the requirement is trivially satisfied. Thus, all stack operations have constant amortised time.</p>
+<p>Here, this resulted in the same amortised costs as the accounting method.</p>
+<h2 id="binary-counter">Binary counter</h2>
+<p>Suppose we have a counter which counts by 1 in binary, from 0 to 1 to 10 and so on. The total cost is the number of bits flipped.</p>
+<p>This works by flipping all the rightmost 1 bits to 0, then set a 1 in the next place.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">def</span> increment(A, k):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>    <span class="cf">while</span> i <span class="op">&lt;</span> k <span class="kw">and</span> A[i] <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>        A[i] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>        i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>    <span class="cf">if</span> i <span class="op">&lt;</span> k:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>        A[i] <span class="op">=</span> <span class="dv">1</span></span></code></pre></div>
+<p>The worst case is if we have a chain of ones and this will take time <span class="math inline">n</span>, the length of <span class="math inline">A</span>. Doing <span class="math inline">n</span> increments would be <span class="math inline">n^2</span> then? Of course not!</p>
+<p>Let’s see how we can think of this.</p>
+<h3 id="aggregate-method">Aggregate method</h3>
+<p>We want to count the number of flips. After <span class="math inline">n</span> increments, the number of times bit <span class="math inline">i</span> is flipped is <span class="math inline">\lfloor n/2^i \rfloor</span>. Bit 0 flips every time, 1 flips every second time, 2 flips every 4th increment, and so on.</p>
+<figure>
+<img src="/assets/image-20201108000211444.png" alt="" /><figcaption>image-20201108000211444</figcaption>
+</figure>
+<p>Hence, the total cost is <span class="math display">
+\sum_{i=0}^{k-1}\left\lfloor\frac n {2^i}\right\rfloor \le 
+\sum_{i=0}^{k-1}\frac n {2^i} &lt; n \sum_{i=0}^\infty \frac 1 {2^i} = 2n \in O(n).
+</span> The aggregate method is writing the actual cost using a summation.</p>
+<h3 id="accounting-method-1">Accounting method</h3>
+<p>The actual cost is the number of low-order 1s plus one for the final flip of 0 to 1.</p>
+<p>To determine the amortised cost, let each flip from 0 to 1 have amortised cost of 2 and let each flip from 1 to 0 have cost 0. The amortised cost of increment is then 2.</p>
+<p>We must show this is an upper bound on the actual cost. Flips from 1 to 0 must occur after that flip has already been flipped and hence paid for.</p>
+<h2 id="array-resizing">Array resizing</h2>
+<p>We return to this using the accounting method.</p>
+<h3 id="accounting-method-2">Accounting method</h3>
+<p>The actual cost is as before. We can charge a cost of 3 for the <span class="math inline">i</span>-th insertion which is made up of 1 for the insert, and 2 for later doubling (1 for copying itself and 1 for copying an older element). We need to account for old elements because their credit would already have been used in the previous doubling, so we only have spare money from the most recent half.</p>
+<p>This is essentially manually applying the cost upfront at each operation.</p>
+<p>The invariant is that the “bank balance” never drops below zero. This is the same as the sum of amortised costs being an upper bound for sum of actual costs.</p>
+<h2 id="potential-method-1">Potential method</h2>
+<p>We need to determine a potential function. Here, this can be <span class="math inline">\Phi(D_i)=2i - 2^{\lceil \log i \rceil}</span>. Assume that <span class="math inline">2^{\lceil \log 0 \rceil}=0</span> which trivially satisfies <span class="math inline">\Phi(D_0)=0</span> and <span class="math inline">\Phi(D_i) \ge 0</span>. This is essentially the same as a “bank balance” from before.</p>
+<p>The amortised cost of the <span class="math inline">i</span>-th insertion is <span class="math display">
+\begin{aligned}
+\hat c_i &amp;= c_i - \Phi(D_i)-\Phi(D_{i-1})  \\ 
+&amp;= \begin{cases}
+i, &amp; i-1\text{ is a power of 2}, \\ 
+1, &amp;\text{else},
+\end{cases}
++(2i-2^{\lceil \log i\rceil })
+-(2(i-1)-2^{\lceil \log (i-1)\rceil })
+\end{aligned}
+</span> Looking at each case, if <span class="math inline">i-1</span> is an exact power of <span class="math inline">2</span>, <span class="math display">
+\begin{aligned}
+\hat c_i &amp;= i+2 - 2^{\lceil \log i \rceil} + 2^{\lceil \log (i-1)\rceil} \\ 
+&amp;= i+2 - 2(i-1) + (i-1) \\ 
+&amp;= 3
+\end{aligned}
+</span> If <span class="math inline">i-1</span> is not an exact power of 2, the ceiling makes the power the same and so <span class="math display">
+\hat c_i=3.
+</span> Therefore, <span class="math inline">n</span> inserts take <span class="math inline">\Theta(n)</span> amortised time in the worst case.</p>
+    <p><small>Generated at 11/8/2020, 8:22:04 AM.</small></p>
+  </body>
+</html>
