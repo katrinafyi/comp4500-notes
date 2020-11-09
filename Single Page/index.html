@@ -377,6 +377,9 @@
 
                     <li><a href="#strategy">Strategy</a>
             		</li>
+
+                    <li><a href="#reference-sheet">Reference sheet</a>
+            		</li>
                 </ol>
             		</li>
                 </ol>
@@ -702,7 +705,7 @@ f(n) / g(n) \in \Omega(n^\epsilon).
 <p>It visits a vertex <span class="math inline">v</span> then visiting all unvisited adjacent vertices <span class="math inline">u</span> to <span class="math inline">v</span>.</p>
 <p>It has complexity <span class="math inline">\Theta(v) + (\sum_{v}(\Theta(1) + \operatorname*{outDegree}(v)\Theta(1)))=\Theta(v+e)</span>.</p>
 <h2 id="topological-sort">Topological sort</h2>
-<p>To implement topological sort, we can DFS and add vertices to the end of the list when it has no further unvisited neighbours.</p><h1>Lecture 4</h1>
+<p>To implement topological sort, we can DFS and add vertices to the end of the list when it has no further unvisited neighbours. That is, return them in decreasing order of their finishing time.</p><h1>Lecture 4</h1>
 
   <!--
 <header id="title-block-header">
@@ -1504,6 +1507,28 @@ P(z_i \text{ compared to }z_j)&amp;=P(z_i\text{ or }z_j \text{ is first pivot ch
 <li>Nothing written is useless.</li>
 <li>Exam is designed to test problem solving. Do not share answers.</li>
 </ul>
-    <p><small>Generated at 11/8/2020, 8:41:52 AM.</small></p>
+<h2 id="reference-sheet">Reference sheet</h2>
+<h3 id="geometric-series">Geometric series</h3>
+<p><span class="math display">
+\begin{aligned}
+\sum_{i=0}^{n-1} r^i =\sum_{i=1}^{n}r^{i-1}&amp;= \frac{1-r^n}{1-r} \\ 
+\sum_{i=1}^{n}ir^{i-1}&amp;=\frac{(n+1)r^n}{1-r}
+\end{aligned}
+</span></p>
+<h3 id="arithmetic-series">Arithmetic series</h3>
+<p><span class="math display">
+\sum_{i=0}^n i =\frac{n(n+1)}2 
+</span></p>
+<h3 id="breadth-first-search-bfs">Breadth-first search (BFS)</h3>
+<p>See Lecture 3.</p>
+<figure>
+<img src="/assets/image-20201109174815805.png" alt="" /><figcaption>image-20201109174815805</figcaption>
+</figure>
+<h3 id="depth-first-search-dfs">Depth-first search (DFS)</h3>
+<p>See Lecture 3.</p>
+<figure>
+<img src="/assets/image-20201109174952011.png" alt="" /><figcaption>image-20201109174952011</figcaption>
+</figure>
+    <p><small>Generated at 11/9/2020, 7:57:35 AM.</small></p>
   </body>
 </html>
