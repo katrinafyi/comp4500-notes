@@ -143,4 +143,4 @@ It has complexity $\Theta(v) + (\sum_{v}(\Theta(1) + \operatorname*{outDegree}(v
 
 ## Topological sort
 
-To implement topological sort, we can DFS and add vertices to the end of the list when it has no further unvisited neighbours.
+To implement topological sort, we can DFS and add vertices to the end of the list when it has no further unvisited neighbours. That is, return them in decreasing order of their finishing time.

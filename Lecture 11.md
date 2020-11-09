@@ -45,3 +45,32 @@ There is a penalty for late submissions of 20% for 1 to 15 minutes late, 50% for
 - Even if you do not know the answers, *try*.
 - Nothing written is useless.
 - Exam is designed to test problem solving. Do not share answers.
+
+## Reference sheet
+
+### Geometric series
+
+$$
+\begin{aligned}
+\sum_{i=0}^{n-1} r^i =\sum_{i=1}^{n}r^{i-1}&= \frac{1-r^n}{1-r} \\ 
+\sum_{i=1}^{n}ir^{i-1}&=\frac{(n+1)r^n}{1-r}
+\end{aligned}
+$$
+
+### Arithmetic series
+
+$$
+\sum_{i=0}^n i =\frac{n(n+1)}2 
+$$
+
+### Breadth-first search (BFS)
+
+See Lecture 3.
+
+![image-20201109174815805](assets/image-20201109174815805.png)
+
+### Depth-first search (DFS)
+
+See Lecture 3.
+
+![image-20201109174952011](assets/image-20201109174952011.png)
